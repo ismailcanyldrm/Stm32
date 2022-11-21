@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"problems.showCurrentInStatus": true,
+		"problems.sortOrder": "position"
+	}
+}
