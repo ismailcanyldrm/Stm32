@@ -46,6 +46,9 @@
 
 #include "../../feature/tramming.h"
 
+#include <iostream>
+#include <string>
+
 /**
  * G35: Read bed corners to help adjust bed screws
  *
@@ -59,6 +62,18 @@
  *               51 - Counter-Clockwise M5
  **/
 void GcodeSuite::G35() {
+
+  // SERIAL_ECHOPGM("\xFF\xFF\xFF");
+  // SERIAL_ECHOPGM("t40.txt=\"deneme yazisi t41 a yazilacak\"");
+  // SERIAL_ECHOPGM("\xFF\xFF\xFF");
+
+  // SERIAL_ECHOPGM("\xFF\xFF\xFF");
+  // SERIAL_ECHOPGM("t41.txt=\"","deneme","a","yaz\"");
+  // SERIAL_ECHOPGM("\xFF\xFF\xFF");
+
+
+
+
   DEBUG_SECTION(log_G35, "G35", DEBUGGING(LEVELING));
 
   if (DEBUGGING(LEVELING)) log_machine_info();
@@ -139,14 +154,29 @@ void GcodeSuite::G35() {
       const int full_turns = trunc(adjust);
       const float decimal_part = adjust - float(full_turns);
       const int minutes = trunc(decimal_part * 60.0f);
-
-      SERIAL_ECHOPGM("Turn ");
+    
+      SERIAL_ECHOPGM("Tun ");
       SERIAL_ECHOPGM_P((char *)pgm_read_ptr(&tramming_point_name[i]));
       SERIAL_ECHOPGM(" ", (screw_thread & 1) == (adjust > 0) ? "CCW" : "CW", " by ", ABS(full_turns), " turns");
       if (minutes) SERIAL_ECHOPGM(" and ", ABS(minutes), " minutes");
-      if (ENABLED(REPORT_TRAMMING_MM)) SERIAL_ECHOPGM(" (", -diff, "mm)");
-      //SERIAL_EOL();
+
+
+      if ((char *)pgm_read_ptr(&tramming_point_name[1]) = true){
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+        if (minutes)SERIAL_ECHOPGM("t40.txt=\"","",(char *)pgm_read_ptr(&tramming_point_name[1]),"Turn ", (screw_thread & 1) == (adjust > 0) ? "CCW" : "CW", " by ", "", ABS(full_turns) , " turns"," and ", "", ABS(minutes), " minutes\n\"");
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+        
+        if (ENABLED(REPORT_TRAMMING_MM)) SERIAL_ECHOPGM(" (", -diff, "mm)");
+      }
+      if ((char *)pgm_read_ptr(&tramming_point_name[2]) = true){
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+        if (minutes)SERIAL_ECHOPGM("t41.txt=\"","",(char *)pgm_read_ptr(&tramming_point_name[2]),"Turn ", (screw_thread & 1) == (adjust > 0) ? "CCW" : "CW", " by ", "", ABS(full_turns) , " turns"," and ", "", ABS(minutes), " minutes\n\"");
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+        //SERIAL_EOL();
+        if (ENABLED(REPORT_TRAMMING_MM)) SERIAL_ECHOPGM(" (", -diff, "mm)");
+      }
     }
+      
   }
   else
     SERIAL_ECHOLNPGM("G35 aborted.");

@@ -15,4 +15,7 @@ void GcodeSuite::M1234()
 pinMode(ON, OUTPUT); // RÖLE KAPATIYOR. KART KAPALI
 digitalWrite(ON, LOW);
 Serial.println("MACHINE CLOSE");
+// SERIAL_ECHOPGM("\xFF\xFF\xFF");
+// SERIAL_ECHOPGM(" t41.txt=\"deneme yazısı bu yazı t41 a yazılacak\"");
+// SERIAL_ECHOPGM("\xFF\xFF\xFF");
 }
