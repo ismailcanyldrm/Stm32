@@ -62,7 +62,7 @@
  *               51 - Counter-Clockwise M5
  **/
 void GcodeSuite::G35() {
-
+  int x = 0 ;
   // SERIAL_ECHOPGM("\xFF\xFF\xFF");
   // SERIAL_ECHOPGM("t40.txt=\"deneme yazisi t41 a yazilacak\"");
   // SERIAL_ECHOPGM("\xFF\xFF\xFF");
@@ -154,27 +154,25 @@ void GcodeSuite::G35() {
       const int full_turns = trunc(adjust);
       const float decimal_part = adjust - float(full_turns);
       const int minutes = trunc(decimal_part * 60.0f);
-    
-      SERIAL_ECHOPGM("Tun ");
-      SERIAL_ECHOPGM_P((char *)pgm_read_ptr(&tramming_point_name[i]));
-      SERIAL_ECHOPGM(" ", (screw_thread & 1) == (adjust > 0) ? "CCW" : "CW", " by ", ABS(full_turns), " turns");
-      if (minutes) SERIAL_ECHOPGM(" and ", ABS(minutes), " minutes");
-
-
-      if ((char *)pgm_read_ptr(&tramming_point_name[1]) = true){
+         
+      
+      if (x == 1){
         SERIAL_ECHOPGM("\xFF\xFF\xFF");
-        if (minutes)SERIAL_ECHOPGM("t40.txt=\"","",(char *)pgm_read_ptr(&tramming_point_name[1]),"Turn ", (screw_thread & 1) == (adjust > 0) ? "CCW" : "CW", " by ", "", ABS(full_turns) , " turns"," and ", "", ABS(minutes), " minutes\n\"");
+        SERIAL_ECHOPGM("t40.txt=\"","Turn ","",(char *)pgm_read_ptr(&tramming_point_name[2]), (screw_thread & 1) == (adjust > 0) ? "CCW" : "CW", " by ", "", ABS(full_turns) , " turns"," and ", "", ABS(minutes), " minutes\n\"");
         SERIAL_ECHOPGM("\xFF\xFF\xFF");
         
-        if (ENABLED(REPORT_TRAMMING_MM)) SERIAL_ECHOPGM(" (", -diff, "mm)");
+        
       }
-      if ((char *)pgm_read_ptr(&tramming_point_name[2]) = true){
+      if (x == 0){
         SERIAL_ECHOPGM("\xFF\xFF\xFF");
-        if (minutes)SERIAL_ECHOPGM("t41.txt=\"","",(char *)pgm_read_ptr(&tramming_point_name[2]),"Turn ", (screw_thread & 1) == (adjust > 0) ? "CCW" : "CW", " by ", "", ABS(full_turns) , " turns"," and ", "", ABS(minutes), " minutes\n\"");
+        SERIAL_ECHOPGM("t41.txt=\"","Turn ","",(char *)pgm_read_ptr(&tramming_point_name[1]), (screw_thread & 1) == (adjust > 0) ? "CCW" : "CW", " by ", "", ABS(full_turns) , " turns"," and ", "", ABS(minutes), " minutes\n\"");
         SERIAL_ECHOPGM("\xFF\xFF\xFF");
         //SERIAL_EOL();
-        if (ENABLED(REPORT_TRAMMING_MM)) SERIAL_ECHOPGM(" (", -diff, "mm)");
+        x=+1;
+
       }
+      if (ENABLED(REPORT_TRAMMING_MM)) SERIAL_ECHOPGM(" (", -diff, "mm)");
+      
     }
       
   }
