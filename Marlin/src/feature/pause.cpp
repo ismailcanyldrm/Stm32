@@ -38,6 +38,7 @@
 #include "../module/stepper.h"
 #include "../module/printcounter.h"
 #include "../module/temperature.h"
+#include "../module/endstops.h"
 
 #if ENABLED(FWRETRACT)
   #include "fwretract.h"
@@ -458,6 +459,7 @@ bool pause_print(const_float_t retract, const xyz_pos_t &park_point, const bool 
   // Unload the filament, if specified
   if (unload_length)
     unload_filament(unload_length, show_lcd, PAUSE_MODE_CHANGE_FILAMENT);
+    endstops.filament(); //filament okuma 25.11.2022
 
   #if ENABLED(DUAL_X_CARRIAGE)
     set_duplication_enabled(saved_ext_dup_mode, saved_ext);
@@ -595,6 +597,7 @@ void wait_for_confirmation(const bool is_reload/*=false*/, const int8_t max_beep
 void resume_print(const_float_t slow_load_length/*=0*/, const_float_t fast_load_length/*=0*/, const_float_t purge_length/*=ADVANCED_PAUSE_PURGE_LENGTH*/, const int8_t max_beep_count/*=0*/, const celsius_t targetTemp/*=0*/ DXC_ARGS) {
   DEBUG_SECTION(rp, "resume_print", true);
   DEBUG_ECHOLNPGM("... slowlen:", slow_load_length, " fastlen:", fast_load_length, " purgelen:", purge_length, " maxbeep:", max_beep_count, " targetTemp:", targetTemp DXC_SAY);
+  endstops.filament(); // filament okuma 25.11.22
   SERIAL_ECHOPGM("\xFF\xFF\xFF");
   SERIAL_ECHOPGM("t10.txt=\"Resume process started...\"");
   SERIAL_ECHOPGM("\xFF\xFF\xFF");

@@ -196,6 +196,7 @@ class Endstops {
      */
     static void report_states();
 
+    static void filament();
     // Enable / disable endstop checking globally
     static void enable_globally(const bool onoff=true);
 

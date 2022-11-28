@@ -1078,7 +1078,7 @@ void GcodeSuite::process_parsed_command(const bool no_ok/*=false*/) {
         case 2828: M2828(); break;
         case 3434: M3434(); break;
         case 1234: M1234(); break;
-        //case 151: M151(); break;
+        case 2525: M2525(); break;  //FİLAMENT İZLEME KOMUTU
 
         #endif
 

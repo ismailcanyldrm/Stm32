@@ -23,7 +23,8 @@
 /**
  * endstops.cpp - A singleton object to manage endstops
  */
-
+#include <iostream>
+#include <string>
 #include "endstops.h"
 #include "stepper.h"
 
@@ -490,9 +491,48 @@ static void print_es_state(const bool is_hit, FSTR_P const flabel=nullptr) {
   if (flabel) SERIAL_ECHOF(flabel);
   SERIAL_ECHOPGM(": ");
   SERIAL_ECHOLNF(is_hit ? F(STR_ENDSTOP_HIT) : F(STR_ENDSTOP_OPEN));
+  
+}
+int k = 0;
+static void print_es_states(const bool is_hit, FSTR_P const flabel=nullptr) {
+  if(is_hit ){
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    SERIAL_ECHOPGM("t06.txt=\"","filament var\"");
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    SERIAL_ECHOPGM("j0.val=100");
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    k=0;
+  }
+  else{
+    if(k == 0) {
+      SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      SERIAL_ECHOPGM("page M2525");
+      SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      k=1;
+    }
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    SERIAL_ECHOPGM("t06.txt=\"","filament bitti. Filament yukleyin\"");
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    SERIAL_ECHOPGM("j0.val=0");
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+
+  }
+    
 }
 
 #pragma GCC diagnostic pop
+
+
+void _O2 Endstops::filament() {
+  TERN_(BLTOUCH, bltouch._set_SW_mode());
+  #if HAS_FILAMENT_SENSOR
+    print_es_states(READ(FIL_RUNOUT1_PIN) != FIL_RUNOUT1_STATE, F(STR_FILAMENT));
+  #endif
+  TERN_(BLTOUCH, bltouch._reset_SW_mode());
+  TERN_(JOYSTICK_DEBUG, joystick.report());
+
+}
+
 
 void _O2 Endstops::report_states() {
   TERN_(BLTOUCH, bltouch._set_SW_mode());
