@@ -263,7 +263,7 @@ bool load_filament(const_float_t slow_load_length/*=0*/, const_float_t fast_load
 
   #else
 
-/*
+
     do {
       if (purge_length > 0) {
         // "Wait for filament purge"
@@ -291,7 +291,7 @@ bool load_filament(const_float_t slow_load_length/*=0*/, const_float_t fast_load
 
       // Keep looping if "Purge More" was selected
     } while (TERN0(M600_PURGE_MORE_RESUMABLE, pause_menu_response == PAUSE_RESPONSE_EXTRUDE_MORE));
-    */
+    
 
   #endif
   TERN_(HOST_PROMPT_SUPPORT, hostui.prompt_end());
