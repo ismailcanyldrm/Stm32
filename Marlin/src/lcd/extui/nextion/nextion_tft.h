@@ -50,6 +50,7 @@ class NextionTFT {
     static void UpdateOnChange();
     static void PrintFinished();
     static void PanelInfo(uint8_t);
+    static void _format_time(char *, uint32_t);
 
   private:
     static bool ReadTFTCommand();
@@ -57,7 +58,7 @@ class NextionTFT {
     static void SelectFile();
     static void ProcessPanelRequest();
     static void PanelAction(uint8_t);
-    static void _format_time(char *, uint32_t);
+
 };
 
 extern NextionTFT nextion;

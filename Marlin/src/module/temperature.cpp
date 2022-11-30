@@ -27,6 +27,10 @@
 // Useful when debugging thermocouples
 //#define IGNORE_THERMOCOUPLE_ERRORS
 
+// 28.11.2022 kütüphaneleri zamanı görmek için ekledim.
+#include "../lcd/extui/nextion/FileNavigator.h"
+#include "../lcd/extui/nextion/nextion_tft.h"
+#include "../inc/MarlinConfigPre.h"
 #include "../MarlinCore.h"
 #include "../HAL/shared/Delay.h"
 #include "../lcd/marlinui.h"
@@ -3612,7 +3616,29 @@ void Temperature::isr() {
     //SERIAL_ECHOPGM(" /");
 
 
+// burayı geçen zamanı görmek için ekledim.
+      char buffer[22];
+      duration_t(print_job_timer.duration()).toString(buffer);
+      ui.set_status(buffer);
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+        SERIAL_ECHOPGM("t19.txt=\"", "",buffer,"\"");
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
 
+      const uint32_t remaining = getProgress_seconds_remaining();
+      char remaining_str[10];
+      nextion._format_time(remaining_str, remaining);
+
+      SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      SERIAL_ECHOPGM("t20.txt=\"","",remaining_str,"\"");
+      SERIAL_ECHOPGM("\xFF\xFF\xFF");
+
+      // char parse[22];
+      // if (parser.seenval('R')) ui.set_remaining_time(60 * parser.value_ulong());
+      //   duration_t(parser.value_ulong()).toString(parse);
+      //   SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      //   SERIAL_ECHOPGM("t20.txt=\"","",parse,"\"");
+      //   SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      
     #if ENABLED(SHOW_TEMP_ADC_VALUES)
       // Temperature MAX SPI boards do not have an OVERSAMPLENR defined
       SERIAL_ECHOPGM(" (", TERN(HAS_MAXTC_LIBRARIES, k == 'T', false) ? r : r * RECIPROCAL(OVERSAMPLENR));
