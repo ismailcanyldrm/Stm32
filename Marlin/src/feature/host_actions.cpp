@@ -44,8 +44,9 @@ flag_t HostUI::flag;
 void HostUI::action(FSTR_P const fstr, const bool eol) {
   if (!flag.bits) return;
   PORT_REDIRECT(SerialMask::All);
-  SERIAL_ECHOPGM("//action:");
-  SERIAL_ECHOF(fstr);
+  //01.12.2022 ekrana gereksiz bilgi yazdırdığı için kaldırıldı.
+  //SERIAL_ECHOPGM("//action:"); 
+  //SERIAL_ECHOF(fstr);
   //if (eol) //SERIAL_EOL();
 }
 
@@ -99,7 +100,7 @@ void HostUI::action(FSTR_P const fstr, const bool eol) {
     if (!flag.bits) return;
     PORT_REDIRECT(SerialMask::All);
     action(F("notification "), false);
-    SERIAL_ECHOLN(cstr);
+    //SERIAL_ECHOLN(cstr); gereksiz seriale birşeyler yazdırdığı için kaldırıldı
   }
 
   void HostUI::notify_P(PGM_P const pstr) {
