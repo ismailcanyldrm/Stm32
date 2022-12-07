@@ -1238,6 +1238,7 @@ private:
   static void M3434(); // HMI EKRAN DENEMESİ İÇİN SİLİNEBİLİR
   static void M1234(); // REZERVE SİLİNEBİLİR
   static void M2525(); // Filament izlemek için
+  static void M1181();
 
 };
 

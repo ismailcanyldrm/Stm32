@@ -31,7 +31,9 @@
  *  Pn  Redirect to another serial port
  *        0 : Announce to all ports
  *      1-9 : Serial ports 1 to 9
+ * 
  */
+int x = 0;
 void GcodeSuite::M118() {
   bool hasE = false, hasA = false;
   #if HAS_MULTI_SERIAL
@@ -56,5 +58,60 @@ void GcodeSuite::M118() {
 
   if (hasE) SERIAL_ECHO_START();
   if (hasA) SERIAL_ECHOPGM("//");
-  SERIAL_ECHOLN(p);
+
+  if (x==8){
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    SERIAL_ECHOPGM("b108.txt=\"","",p,"\"");
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    x+=1;
+  }
+  if (x==7){
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    SERIAL_ECHOPGM("b107.txt=\"","",p,"\"");
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    x+=1;
+  }
+  if (x==6){
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    SERIAL_ECHOPGM("b106.txt=\"","",p,"\"");
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    x+=1;
+  }
+  if (x==5){
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    SERIAL_ECHOPGM("b105.txt=\"","",p,"\"");
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    x+=1;
+  }
+  if (x==4){
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    SERIAL_ECHOPGM("b104.txt=\"","",p,"\"");
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    x+=1;
+  }
+  if (x==3){
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    SERIAL_ECHOPGM("b103.txt=\"","",p,"\"");
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    x+=1;
+  }
+  if (x==2){
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    SERIAL_ECHOPGM("b102.txt=\"","",p,"\"");
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    x+=1;
+  }
+  if (x==1){
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    SERIAL_ECHOPGM("b101.txt=\"","",p,"\"");
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    x+=1;
+  }
+  if (x==0){
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    SERIAL_ECHOPGM("b100.txt=\"","",p,"\"");
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    x+=1;
+  }
+
 }
