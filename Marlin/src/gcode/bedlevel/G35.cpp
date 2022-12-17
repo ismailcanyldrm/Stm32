@@ -63,18 +63,19 @@
  **/
 void GcodeSuite::G35() {
   int x = 0 ;
-  SERIAL_ECHOPGM("\xFF\xFF\xFF");
-  SERIAL_ECHOPGM("p0.pic=122");
-  SERIAL_ECHOPGM("\xFF\xFF\xFF");
-  SERIAL_ECHOPGM("\xFF\xFF\xFF");
-  SERIAL_ECHOPGM("p1.pic=122");
-  SERIAL_ECHOPGM("\xFF\xFF\xFF");
-  SERIAL_ECHOPGM("\xFF\xFF\xFF");
-  SERIAL_ECHOPGM("p2.pic=123");
-  SERIAL_ECHOPGM("\xFF\xFF\xFF");
-  SERIAL_ECHOPGM("\xFF\xFF\xFF");
-  SERIAL_ECHOPGM("p3.pic=123");
-  SERIAL_ECHOPGM("\xFF\xFF\xFF");
+  // SERIAL_ECHOPGM("\xFF\xFF\xFF");
+  // SERIAL_ECHOPGM("p0.pic=122");
+  // SERIAL_ECHOPGM("\xFF\xFF\xFF");
+  // SERIAL_ECHOPGM("\xFF\xFF\xFF");
+  // SERIAL_ECHOPGM("p1.pic=122");
+  // SERIAL_ECHOPGM("\xFF\xFF\xFF");
+  // SERIAL_ECHOPGM("\xFF\xFF\xFF");
+  // SERIAL_ECHOPGM("p2.pic=123");
+  // SERIAL_ECHOPGM("\xFF\xFF\xFF");
+  // SERIAL_ECHOPGM("\xFF\xFF\xFF");
+  // SERIAL_ECHOPGM("p3.pic=123");
+  // SERIAL_ECHOPGM("\xFF\xFF\xFF");
+  
   // SERIAL_ECHOPGM("\xFF\xFF\xFF");
   // SERIAL_ECHOPGM("t40.txt=\"deneme yazisi t41 a yazilacak\"");
   // SERIAL_ECHOPGM("\xFF\xFF\xFF");
@@ -170,175 +171,177 @@ void GcodeSuite::G35() {
       
       if (x == 1){
         SERIAL_ECHOPGM("\xFF\xFF\xFF");
-        SERIAL_ECHOPGM("t40.txt=\"","Turn ","",(char *)pgm_read_ptr(&tramming_point_name[2]), (screw_thread & 1) == (adjust > 0) ? "CCW" : "CW", " by ", "", ABS(full_turns) , " turns"," and ", "", ABS(minutes), " degree\n\"");
+        SERIAL_ECHOPGM("t4.txt=\"","Turn ","",(char *)pgm_read_ptr(&tramming_point_name[2]), (screw_thread & 1) == (adjust > 0) ? "CCW" : "CW","\n\"") ;
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+        SERIAL_ECHOPGM("t40.txt=\"",ABS(full_turns) , " Turns"," and ", "", ABS(minutes), " Degree\n\"");
         SERIAL_ECHOPGM("\xFF\xFF\xFF");
         if ( (screw_thread & 1) == (adjust > 0)){
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
-          SERIAL_ECHOPGM("p1.pic=120");
+          SERIAL_ECHOPGM("p1.pic=171");
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
           if (ABS(minutes)<=22.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=124");
+            SERIAL_ECHOPGM("p3.pic=172");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=45){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=125");
+            SERIAL_ECHOPGM("p3.pic=173");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=67.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=126");
+            SERIAL_ECHOPGM("p3.pic=174");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=90){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=127");
+            SERIAL_ECHOPGM("p3.pic=175");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=112.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=128");
+            SERIAL_ECHOPGM("p3.pic=176");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=135){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=129");
+            SERIAL_ECHOPGM("p3.pic=177");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=157.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=130");
+            SERIAL_ECHOPGM("p3.pic=178");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=180){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=131");
+            SERIAL_ECHOPGM("p3.pic=179");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=202.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=132");
+            SERIAL_ECHOPGM("p3.pic=180");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=225){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=133");
+            SERIAL_ECHOPGM("p3.pic=181");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=247.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=134");
+            SERIAL_ECHOPGM("p3.pic=182");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=270){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=135");
+            SERIAL_ECHOPGM("p3.pic=183");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=292.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=136");
+            SERIAL_ECHOPGM("p3.pic=184");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=315){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=137");
+            SERIAL_ECHOPGM("p3.pic=185");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=337.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=138");
+            SERIAL_ECHOPGM("p3.pic=186");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=360){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=139");
+            SERIAL_ECHOPGM("p3.pic=187");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
         }
         else{
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
-          SERIAL_ECHOPGM("p1.pic=121");
+          SERIAL_ECHOPGM("p1.pic=207");
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
           if (ABS(minutes)<=22.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=140");
+            SERIAL_ECHOPGM("p3.pic=188");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=45){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=141");
+            SERIAL_ECHOPGM("p3.pic=189");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=67.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=142");
+            SERIAL_ECHOPGM("p3.pic=190");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=90){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=143");
+            SERIAL_ECHOPGM("p3.pic=191");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=112.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=144");
+            SERIAL_ECHOPGM("p3.pic=192");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=135){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=145");
+            SERIAL_ECHOPGM("p3.pic=193");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=157.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=146");
+            SERIAL_ECHOPGM("p3.pic=194");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=180){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=147");
+            SERIAL_ECHOPGM("p3.pic=195");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=202.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=148");
+            SERIAL_ECHOPGM("p3.pic=196");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=225){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=149");
+            SERIAL_ECHOPGM("p3.pic=197");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=247.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=150");
+            SERIAL_ECHOPGM("p3.pic=198");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=270){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=151");
+            SERIAL_ECHOPGM("p3.pic=199");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=292.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=152");
+            SERIAL_ECHOPGM("p3.pic=200");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=315){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=153");
+            SERIAL_ECHOPGM("p3.pic=201");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=337.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=154");
+            SERIAL_ECHOPGM("p3.pic=202");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=360){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=139");
+            SERIAL_ECHOPGM("p3.pic=203");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
         }
@@ -349,172 +352,172 @@ void GcodeSuite::G35() {
         SERIAL_ECHOPGM("\xFF\xFF\xFF");
         if ( (screw_thread & 1) == (adjust > 0)){
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
-          SERIAL_ECHOPGM("p0.pic=120");
+          SERIAL_ECHOPGM("p0.pic=171");
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
           if (ABS(minutes)<=22.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=124");
+            SERIAL_ECHOPGM("p2.pic=172");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=45){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=125");
+            SERIAL_ECHOPGM("p2.pic=173");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=67.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=126");
+            SERIAL_ECHOPGM("p2.pic=174");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=90){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=127");
+            SERIAL_ECHOPGM("p2.pic=175");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=112.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=128");
+            SERIAL_ECHOPGM("p2.pic=176");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=135){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=129");
+            SERIAL_ECHOPGM("p2.pic=177");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=157.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=130");
+            SERIAL_ECHOPGM("p2.pic=178");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=180){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=131");
+            SERIAL_ECHOPGM("p2.pic=179");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=202.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=132");
+            SERIAL_ECHOPGM("p2.pic=180");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=225){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=133");
+            SERIAL_ECHOPGM("p2.pic=181");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=247.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=134");
+            SERIAL_ECHOPGM("p2.pic=182");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=270){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=135");
+            SERIAL_ECHOPGM("p2.pic=183");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=292.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=136");
+            SERIAL_ECHOPGM("p2.pic=184");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=315){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=137");
+            SERIAL_ECHOPGM("p2.pic=185");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=337.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=138");
+            SERIAL_ECHOPGM("p2.pic=186");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=360){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=139");
+            SERIAL_ECHOPGM("p2.pic=187");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           
         }
         else{
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
-          SERIAL_ECHOPGM("p0.pic=121");
+          SERIAL_ECHOPGM("p0.pic=207");
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
           if (ABS(minutes)<=22.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=140");
+            SERIAL_ECHOPGM("p2.pic=188");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=45){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=141");
+            SERIAL_ECHOPGM("p2.pic=189");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=67.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=142");
+            SERIAL_ECHOPGM("p2.pic=190");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=90){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=143");
+            SERIAL_ECHOPGM("p2.pic=191");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=112.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=144");
+            SERIAL_ECHOPGM("p2.pic=192");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=135){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=145");
+            SERIAL_ECHOPGM("p2.pic=193");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=157.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=146");
+            SERIAL_ECHOPGM("p2.pic=194");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=180){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=147");
+            SERIAL_ECHOPGM("p2.pic=195");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=202.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=148");
+            SERIAL_ECHOPGM("p2.pic=196");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=225){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=149");
+            SERIAL_ECHOPGM("p2.pic=197");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=247.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=150");
+            SERIAL_ECHOPGM("p2.pic=198");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=270){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=151");
+            SERIAL_ECHOPGM("p2.pic=199");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=292.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=152");
+            SERIAL_ECHOPGM("p2.pic=200");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=315){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=153");
+            SERIAL_ECHOPGM("p2.pic=201");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=337.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=154");
+            SERIAL_ECHOPGM("p2.pic=202");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           else if (ABS(minutes)<=360){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=139");
+            SERIAL_ECHOPGM("p2.pic=203");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
 

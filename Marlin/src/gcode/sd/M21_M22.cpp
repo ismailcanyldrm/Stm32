@@ -49,7 +49,15 @@ void GcodeSuite::M21() {
  * M22: Release SD Card
  */
 void GcodeSuite::M22() {
-  if (!IS_SD_PRINTING()) card.release();
-}
+  if (!IS_SD_PRINTING()) 
+    card.release();
+    // Set the SPI bus to idle state
+    digitalWrite(SD_SCK_PIN, LOW);
+
+    // Set the SPI pin modes to input
+    pinMode(SD_MISO_PIN, INPUT);
+    pinMode(SD_MOSI_PIN, INPUT);
+    pinMode(SD_SCK_PIN, INPUT);
+  }
 
 #endif // SDSUPPORT

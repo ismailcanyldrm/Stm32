@@ -497,9 +497,9 @@ int k = 0;
 static void print_es_states(const bool is_hit, FSTR_P const flabel=nullptr) {
   if(is_hit ){
     SERIAL_ECHOPGM("\xFF\xFF\xFF");
-    SERIAL_ECHOPGM("t06.txt=\"","filament var\"");
+    SERIAL_ECHOPGM("t06.txt=\"","Filament var\"");
     SERIAL_ECHOPGM("\xFF\xFF\xFF");
-    SERIAL_ECHOPGM("j0.val=100");
+    SERIAL_ECHOPGM("p2.pic=114");
     SERIAL_ECHOPGM("\xFF\xFF\xFF");
     k=0;
   }
@@ -511,9 +511,9 @@ static void print_es_states(const bool is_hit, FSTR_P const flabel=nullptr) {
       k=1;
     }
     SERIAL_ECHOPGM("\xFF\xFF\xFF");
-    SERIAL_ECHOPGM("t06.txt=\"","filament bitti. Filament yukleyin\"");
+    SERIAL_ECHOPGM("t06.txt=\"","Filament bitti. Filament yukleyin\"");
     SERIAL_ECHOPGM("\xFF\xFF\xFF");
-    SERIAL_ECHOPGM("j0.val=0");
+    SERIAL_ECHOPGM("p2.pic=115");
     SERIAL_ECHOPGM("\xFF\xFF\xFF");
 
   }
