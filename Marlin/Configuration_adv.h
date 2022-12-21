@@ -1528,7 +1528,7 @@
   #define UTF_FILENAME_SUPPORT
 
   // This allows hosts to request long names for files and folders with M33
-  //#define LONG_FILENAME_HOST_SUPPORT // HATA VERİYOR
+  #define LONG_FILENAME_HOST_SUPPORT // dosya ismini uzun yazmak için açıldı.
 
   // Enable this option to scroll long filenames in the SD card menu
   #define SCROLL_LONG_FILENAMES

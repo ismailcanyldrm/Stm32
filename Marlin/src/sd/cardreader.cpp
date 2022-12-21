@@ -334,17 +334,40 @@ void CardReader::printListing(
       if (sayac == 0){SERIAL_ECHOPGM("sd_1.txt=\"");}
       if (sayac == 1){SERIAL_ECHOPGM("sd_2.txt=\"");}
       if (sayac == 2){SERIAL_ECHOPGM("sd_3.txt=\"");}
-
+      if (sayac == 3){SERIAL_ECHOPGM("sd_4.txt=\"");}
+      if (sayac == 4){SERIAL_ECHOPGM("sd_5.txt=\"");}
+      if (sayac == 5){SERIAL_ECHOPGM("sd_6.txt=\"");}
+      if (sayac == 6){SERIAL_ECHOPGM("sd_7.txt=\"");}
+      if (sayac == 7){SERIAL_ECHOPGM("sd_8.txt=\"");}
+      if (sayac == 8){SERIAL_ECHOPGM("sd_9.txt=\"");}
+      if (sayac == 9){SERIAL_ECHOPGM("sd_10.txt=\"");}
       SERIAL_ECHO(createFilename(filename, p));
+      SERIAL_ECHOPGM("\"\xFF\xFF\xFF");
 
+      if (sayac == 0){SERIAL_ECHOPGM("sd_11.txt=\"");}
+      if (sayac == 1){SERIAL_ECHOPGM("sd_12.txt=\"");}
+      if (sayac == 2){SERIAL_ECHOPGM("sd_13.txt=\"");}
+      if (sayac == 3){SERIAL_ECHOPGM("sd_14.txt=\"");}
+      if (sayac == 4){SERIAL_ECHOPGM("sd_15.txt=\"");}
+      if (sayac == 5){SERIAL_ECHOPGM("sd_16.txt=\"");}
+      if (sayac == 6){SERIAL_ECHOPGM("sd_17.txt=\"");}
+      if (sayac == 7){SERIAL_ECHOPGM("sd_18.txt=\"");}
+      if (sayac == 8){SERIAL_ECHOPGM("sd_19.txt=\"");}
+      if (sayac == 9){SERIAL_ECHOPGM("sd_20.txt=\"");}
+      SERIAL_ECHO(longFilename);
       SERIAL_ECHOPGM("\"\xFF\xFF\xFF");
 
       if (sayac == 0){SERIAL_ECHOPGM("size_1.txt=\"");}
       if (sayac == 1){SERIAL_ECHOPGM("size_2.txt=\"");}
       if (sayac == 2){SERIAL_ECHOPGM("size_3.txt=\"");}
-
+      if (sayac == 3){SERIAL_ECHOPGM("size_4.txt=\"");}
+      if (sayac == 4){SERIAL_ECHOPGM("size_5.txt=\"");}
+      if (sayac == 5){SERIAL_ECHOPGM("size_6.txt=\"");}
+      if (sayac == 6){SERIAL_ECHOPGM("size_7.txt=\"");}
+      if (sayac == 7){SERIAL_ECHOPGM("size_8.txt=\"");}
+      if (sayac == 8){SERIAL_ECHOPGM("size_9.txt=\"");}
+      if (sayac == 9){SERIAL_ECHOPGM("size_10.txt=\"");}
       SERIAL_ECHO(p.fileSize);
-
       SERIAL_ECHOPGM("\"\xFF\xFF\xFF");
 
       #if ENABLED(LONG_FILENAME_HOST_SUPPORT)
@@ -352,15 +375,14 @@ void CardReader::printListing(
       #endif
 
       #if ENABLED(LONG_FILENAME_HOST_SUPPORT)
-        else {
-          SERIAL_ECHO(p.fileSize);
+          SERIAL_ECHO(longFilename);
           SERIAL_CHAR(' ');
           if (prependLong) {
             SERIAL_ECHO(prependLong);
             SERIAL_CHAR('/');
           }
           SERIAL_ECHOLN(longFilename[0] ? longFilename : "???");
-        }
+        
       #endif
       sayac +=1;
     }
@@ -448,12 +470,7 @@ void CardReader::printSelectedFilename() {
     file.getDosName(dosFilename);
 
     SERIAL_ECHOPGM("\xFF\xFF\xFF");
-
-    SERIAL_ECHOPGM("t5.txt=\"");
-    for(int i = 0; i < FILENAME_LENGTH;i++) {
-      SERIAL_CHAR(dosFilename[i]);
-    }
-    SERIAL_CHAR('\"');
+    SERIAL_ECHOPGM("t5.txt=\"",longFilename,"\"");
     SERIAL_ECHOPGM("\xFF\xFF\xFF");
     #if ENABLED(LONG_FILENAME_HOST_SUPPORT)
       selectFileByName(dosFilename);
