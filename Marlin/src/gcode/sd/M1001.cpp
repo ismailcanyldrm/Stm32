@@ -90,6 +90,9 @@ void GcodeSuite::M1001() {
   {
     PORT_REDIRECT(SerialMask::All);
     SERIAL_ECHOLNPGM(STR_FILE_PRINTED);
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    SERIAL_ECHOPGM("page PRINTDONE");  // yazdırma bittiğinde ekrana bildirim gelmesi.
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
   }
 
   // Update the status LED color
