@@ -457,10 +457,10 @@ bool pause_print(const_float_t retract, const xyz_pos_t &park_point, const bool 
   #endif
 
   // Unload the filament, if specified
-  if (unload_length)
+  if (unload_length){
     unload_filament(unload_length, show_lcd, PAUSE_MODE_CHANGE_FILAMENT);
     endstops.filament(); //filament okuma 25.11.2022
-
+  }
   #if ENABLED(DUAL_X_CARRIAGE)
     set_duplication_enabled(saved_ext_dup_mode, saved_ext);
   #endif
