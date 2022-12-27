@@ -367,23 +367,25 @@ void CardReader::printListing(
       if (sayac == 7){SERIAL_ECHOPGM("size_8.txt=\"");}
       if (sayac == 8){SERIAL_ECHOPGM("size_9.txt=\"");}
       if (sayac == 9){SERIAL_ECHOPGM("size_10.txt=\"");}
-      SERIAL_ECHO(p.fileSize);
-      SERIAL_ECHOPGM("\"\xFF\xFF\xFF");
+      SERIAL_ECHO(p.fileSize/1024);
+      SERIAL_ECHOPGM(" KB\"\xFF\xFF\xFF");
 
-      #if ENABLED(LONG_FILENAME_HOST_SUPPORT)
-        if (!includeLongNames)
-      #endif
+      if (sayac == 0){SERIAL_ECHOPGM("time_1.txt=\"");}
+      if (sayac == 1){SERIAL_ECHOPGM("time_2.txt=\"");}
+      if (sayac == 2){SERIAL_ECHOPGM("time_3.txt=\"");}
+      if (sayac == 3){SERIAL_ECHOPGM("time_4.txt=\"");}
+      if (sayac == 4){SERIAL_ECHOPGM("time_5.txt=\"");}
+      if (sayac == 5){SERIAL_ECHOPGM("time_6.txt=\"");}
+      if (sayac == 6){SERIAL_ECHOPGM("time_7.txt=\"");}
+      if (sayac == 7){SERIAL_ECHOPGM("time_8.txt=\"");}
+      if (sayac == 8){SERIAL_ECHOPGM("time_9.txt=\"");}
+      if (sayac == 9){SERIAL_ECHOPGM("time_10.txt=\"");}
+      SERIAL_ECHO(p.fileSize/27360);
+      SERIAL_ECHOPGM(" m\"\xFF\xFF\xFF");
 
-      #if ENABLED(LONG_FILENAME_HOST_SUPPORT)
-          SERIAL_ECHO(longFilename);
-          SERIAL_CHAR(' ');
-          if (prependLong) {
-            SERIAL_ECHO(prependLong);
-            SERIAL_CHAR('/');
-          }
-          SERIAL_ECHOLN(longFilename[0] ? longFilename : "???");
-        
-      #endif
+
+
+
       sayac +=1;
     }
   }

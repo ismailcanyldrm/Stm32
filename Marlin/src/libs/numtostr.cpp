@@ -29,7 +29,7 @@ char conv[8] = { 0 };
 
 #define DIGIT(n) ('0' + (n))
 #define DIGIMOD(n, f) DIGIT((n)/(f) % 10)
-#define RJDIGIT(n, f) ((n) >= (f) ? DIGIMOD(n, f) : ' ')
+#define RJDIGIT(n, f) ((n) >= (f) ? DIGIMOD(n, f) : '0')
 #define MINUSOR(n, alt) (n >= 0 ? (alt) : (n = -n, '-'))
 #define INTFLOAT(V,N) (((V) * 10 * pow(10, N) + ((V) < 0 ? -5: 5)) / 10)      // pow10?
 #define UINTFLOAT(V,N) INTFLOAT((V) < 0 ? -(V) : (V), N)

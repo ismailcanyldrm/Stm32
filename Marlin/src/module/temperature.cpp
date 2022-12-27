@@ -41,7 +41,7 @@
 #include "printcounter.h"
 #include <iostream>
 #include <string>
-
+#include "../../src/libs/numtostr.h"
 
 
 
@@ -3557,6 +3557,8 @@ void Temperature::isr() {
   static void print_heater_state(const heater_id_t e, const_celsius_float_t c, const_celsius_float_t t
     OPTARG(SHOW_TEMP_ADC_VALUES, const float r)
   ) {
+    const millis_t ms = millis();
+    static millis_t next_event_ms = 0;
     char k;
     switch (e) {
       #if HAS_TEMP_BED
@@ -3617,27 +3619,49 @@ void Temperature::isr() {
 
 
 // burayı geçen zamanı görmek için ekledim.
-      char buffer[22];
-      duration_t(print_job_timer.duration()).toString(buffer);
-      ui.set_status(buffer);
-        SERIAL_ECHOPGM("\xFF\xFF\xFF");
-        SERIAL_ECHOPGM("t19.txt=\"", "",buffer,"\"");
-        SERIAL_ECHOPGM("\xFF\xFF\xFF");
-
-      const uint32_t remaining = getProgress_seconds_remaining();
-      char remaining_str[10];
-      nextion._format_time(remaining_str, remaining);
-
-      SERIAL_ECHOPGM("\xFF\xFF\xFF");
-      SERIAL_ECHOPGM("t20.txt=\"","",remaining_str,"\"");
-      SERIAL_ECHOPGM("\xFF\xFF\xFF");
-
-      // char parse[22];
-      // if (parser.seenval('R')) ui.set_remaining_time(60 * parser.value_ulong());
-      //   duration_t(parser.value_ulong()).toString(parse);
+      // char buffer[22];
+      // duration_t(print_job_timer.duration()).toString(buffer);
+      // ui.set_status(buffer);
       //   SERIAL_ECHOPGM("\xFF\xFF\xFF");
-      //   SERIAL_ECHOPGM("t20.txt=\"","",parse,"\"");
+      //   SERIAL_ECHOPGM("t19.txt=\"", "",buffer,"\"");
       //   SERIAL_ECHOPGM("\xFF\xFF\xFF");
+
+      // const uint32_t remaining = getProgress_seconds_remaining();
+      // char remaining_str[10];
+      // nextion._format_time(remaining_str, remaining);
+
+      if (ELAPSED(ms, next_event_ms)) {
+      next_event_ms = ms + 1000;
+      #if ENABLED(SHOW_REMAINING_TIME)
+        const uint32_t remaining = getProgress_seconds_remaining();
+        char remaining_str[10];
+        nextion._format_time(remaining_str, remaining);
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+        SERIAL_ECHOPGM("t20.txt=\"","",remaining_str,"\"");
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      #endif
+      const uint32_t elapsed = getProgress_seconds_elapsed();
+      char elapsed_str[10];
+      nextion._format_time(elapsed_str, elapsed);
+      SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      SERIAL_ECHOPGM("t19.txt=\"","",elapsed_str,"\"");
+      SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    }
+
+    static uint8_t last_progress =99;
+    if (last_progress != getProgress_percent()) {
+      SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      SERIAL_ECHOPGM("j06.txt=\"");
+      //SERIAL_ECHO(pcttostrpctrj(getProgress_percent())); ekranda yüzde konusunda bir sorun çıkarsa bunu kullanacağım. 
+      SERIAL_ECHO(ui8tostr3rj(getProgress_percent()));
+      SERIAL_ECHOPGM("\"\xFF\xFF\xFF");
+      last_progress = getProgress_percent();
+    }
+
+
+      // SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      // SERIAL_ECHOPGM("t20.txt=\"","",parse,"\"");
+      // SERIAL_ECHOPGM("\xFF\xFF\xFF");
       
     #if ENABLED(SHOW_TEMP_ADC_VALUES)
       // Temperature MAX SPI boards do not have an OVERSAMPLENR defined
@@ -3645,7 +3669,7 @@ void Temperature::isr() {
       SERIAL_CHAR(')');
     #endif
 
-    delay(2);
+    delay(1);
   }
 
   void Temperature::print_heater_states(const uint8_t target_extruder
