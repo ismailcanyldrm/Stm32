@@ -380,12 +380,8 @@ void CardReader::printListing(
       if (sayac == 7){SERIAL_ECHOPGM("time_8.txt=\"");}
       if (sayac == 8){SERIAL_ECHOPGM("time_9.txt=\"");}
       if (sayac == 9){SERIAL_ECHOPGM("time_10.txt=\"");}
-      SERIAL_ECHO(p.fileSize/27360);
-      SERIAL_ECHOPGM(" m\"\xFF\xFF\xFF");
-
-
-
-
+      card.openFileTime(createFilename(filename, p));
+      SERIAL_ECHOPGM("\"\xFF\xFF\xFF");
       sayac +=1;
     }
   }
@@ -743,6 +739,25 @@ void CardReader::openFileRead(const char * const path, const uint8_t subcall_typ
   }
   else
     openFailed(fname);
+}
+void CardReader::openFileTime(const char * const path, const uint8_t subcall_type/*=0*/) {
+  if (!isMounted()) return;
+
+  SdFile *diveDir;
+  const char * const fname = diveToFile(true, diveDir, path);
+  if (!fname) return;
+  if (file.open(diveDir, fname, O_READ)) {
+    filesize = file.fileSize();
+    char commandline[30];
+    int n = file.read(commandline,30);
+    //commandline[n] = '\0';
+    file.close();
+    long s;
+    sscanf(commandline, ";FLAVOR:Marlin ;TIME:%ld", &s);
+    SERIAL_ECHO(s);
+    sdpos=0;
+
+  }
 }
 
 inline void echo_write_to_file(const char * const fname) {
