@@ -750,11 +750,19 @@ void CardReader::openFileTime(const char * const path, const uint8_t subcall_typ
     filesize = file.fileSize();
     char commandline[30];
     int n = file.read(commandline,30);
-    //commandline[n] = '\0';
+    commandline[n] = '\0';
     file.close();
-    long s;
-    sscanf(commandline, ";FLAVOR:Marlin ;TIME:%ld", &s);
-    SERIAL_ECHO(s);
+    long second;
+    sscanf(commandline, ";FLAVOR:Marlin ;TIME:%ld", &second);
+
+    int h = (second % 86400) / 3600;
+    int m = (second % 3600) / 60;
+    int s = second % 60;
+    char total[30];
+    if (h){sprintf(total, "%ih %im %is", h, m, s);}
+    else if (m){sprintf(total, "%im %is", m, s);}
+    else{sprintf(total, "%is",s);}
+    SERIAL_ECHO(total);
     sdpos=0;
 
   }

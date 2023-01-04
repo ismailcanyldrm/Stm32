@@ -183,9 +183,10 @@ void NextionTFT::_format_time(char *outstr, uint32_t time) {
                 min = (time / 60) % 60,
                 sec = time % 60;
   if (hrs)
-    sprintf_P(outstr, PSTR("%02d:%02dm"), hrs, min);
+    sprintf_P(outstr, PSTR("%ih %im %is"), hrs, min ,sec);
   else
-    sprintf_P(outstr, PSTR("%02d:%02ds"), min, sec);
+    sprintf_P(outstr, PSTR("%im %is"), min, sec);
+    //sprintf_P(outstr, PSTR("%02d:%02ds"), min, sec);
 }
 
 void NextionTFT::ProcessPanelRequest() {
@@ -593,10 +594,10 @@ void NextionTFT::PanelAction(uint8_t req) {
 }
 
 void NextionTFT::UpdateOnChange() {
-  const millis_t ms = millis();
-  static millis_t next_event_ms = 0;
-  static celsius_float_t last_degBed = 999, last_degHotend0 = 999, last_degHotend1 = 999,
-                         last_degTargetBed = 999, last_degTargetHotend0 = 999, last_degTargetHotend1 = 999;
+  //const millis_t ms = millis();
+  //static millis_t next_event_ms = 0;
+  //static celsius_float_t last_degBed = 999, last_degHotend0 = 999, last_degHotend1 = 999,
+                         //last_degTargetBed = 999, last_degTargetHotend0 = 999, last_degTargetHotend1 = 999;
   /*
   // tmppage Temperature
   if (!WITHIN(last_degHotend0 - getActualTemp_celsius(E0), -0.2, 0.2) || !WITHIN(last_degTargetHotend0 - getTargetTemp_celsius(E0), -0.5, 0.5)) {
