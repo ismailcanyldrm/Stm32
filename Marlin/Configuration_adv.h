@@ -617,7 +617,7 @@
 #define COOLER_AUTO_FAN_PIN -1
 #define COOLER_FAN_PIN -1
 
-#define EXTRUDER_AUTO_FAN_TEMPERATURE 37 //35 di
+#define EXTRUDER_AUTO_FAN_TEMPERATURE 40 //35 di
 #define EXTRUDER_AUTO_FAN_SPEED 255   // 255 == full speed
 #define CHAMBER_AUTO_FAN_TEMPERATURE 30
 #define CHAMBER_AUTO_FAN_SPEED 255
@@ -994,7 +994,7 @@
 #if ENABLED(ASSISTED_TRAMMING)
 
   // Define positions for probe points.
-  #define TRAMMING_POINT_XY { {  170, 275 }, { 40,  50 }, { 290, 50 } }
+  #define TRAMMING_POINT_XY { {  160, 270 }, { 30,  30 }, { 270, 30 } }
 
   // Define position names for probe points.
   #define TRAMMING_POINT_NAME_1 "Back"
