@@ -3597,23 +3597,36 @@ void Temperature::isr() {
    // SERIAL_CHAR(':');
 
 
-   if (k =='T'){SERIAL_ECHOPGM("Temp_Hotend_2.txt=\"");}
-   if (k =='B'){SERIAL_ECHOPGM("Temp_Bed_2.txt=\"");}
-   if (k =='C'){SERIAL_ECHOPGM("Temp_Chamber_2.txt=\"");}
+    if (k =='T'){SERIAL_ECHOPGM("Temp_Hotend_2.txt=\"");}
+    if (k =='B'){SERIAL_ECHOPGM("Temp_Bed_2.txt=\"");}
+    if (k =='C'){SERIAL_ECHOPGM("Temp_Chamber_2.txt=\"");}
 
     SERIAL_PRINT(t, SFP);
 
     SERIAL_ECHOPGM("\"");
     SERIAL_ECHOPGM("\xFF\xFF\xFF");
-
-   if (k =='T'){SERIAL_ECHOPGM("Temp_Hotend_1.txt=\"");}
-   if (k =='B'){SERIAL_ECHOPGM("Temp_Bed_1.txt=\"");}
-   if (k =='C'){SERIAL_ECHOPGM("Temp_Chamber_1.txt=\"");}
-
+    if (k =='T'){SERIAL_ECHOPGM("Temp_Hotend_1.txt=\"");}
+    if (k =='B'){SERIAL_ECHOPGM("Temp_Bed_1.txt=\"");}
     SERIAL_PRINT(c, SFP);
     SERIAL_ECHOPGM("\"");
     SERIAL_ECHOPGM("\xFF\xFF\xFF");
 
+    if (k =='C'){
+      SERIAL_ECHOPGM("Temp_Chamber_1.txt=\"");
+      SERIAL_PRINT(c, SFP);
+      SERIAL_ECHOPGM("\"");
+      SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      if(c<=18.00){
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+        SERIAL_ECHOPGM("ilksayfa.can.val=1");
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      }
+      else{
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+        SERIAL_ECHOPGM("ilksayfa.can.val=0");
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      }
+   }
 
     //SERIAL_ECHOPGM(" /");
 
