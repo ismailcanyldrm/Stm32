@@ -1240,6 +1240,7 @@ private:
   static void M2525(); // Filament izlemek için
   static void M1181();
   static void M1071();
+  static void M2023();
 
 
 };

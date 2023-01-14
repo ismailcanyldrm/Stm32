@@ -1081,6 +1081,7 @@ void GcodeSuite::process_parsed_command(const bool no_ok/*=false*/) {
         case 2525: M2525(); break;  //FİLAMENT İZLEME KOMUTU
         case 1181: M1181(); break;
         case 1071: M1071(); break; 
+        case 2023: M2023(); break;
                                          // M1181: wifi modülüne kod göndermek için eklendi.
 
         #endif
