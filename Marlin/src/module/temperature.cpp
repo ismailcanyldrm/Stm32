@@ -3591,7 +3591,7 @@ void Temperature::isr() {
     #ifdef SERIAL_FLOAT_PRECISION
       #define SFP _MIN(SERIAL_FLOAT_PRECISION, 2)
     #else
-      #define SFP 2
+      #define SFP 1
     #endif
 
    // SERIAL_CHAR(':');
@@ -3659,6 +3659,10 @@ void Temperature::isr() {
       SERIAL_ECHOPGM("\xFF\xFF\xFF");
       SERIAL_ECHOPGM("t19.txt=\"","",elapsed_str,"\"");
       SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      const long elapse = getProgress_seconds_elapsed();
+      SERIAL_ECHOPGM("ilksayfa.e.txt=\"");
+      SERIAL_ECHO(elapse);
+      SERIAL_ECHOPGM("\"\xFF\xFF\xFF");
     }
 
     static uint8_t last_progress =99;

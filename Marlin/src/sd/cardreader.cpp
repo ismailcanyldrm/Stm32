@@ -727,6 +727,16 @@ void CardReader::openFileRead(const char * const path, const uint8_t subcall_typ
   if (file.open(diveDir, fname, O_READ)) {
     filesize = file.fileSize();
     sdpos = 0;
+    char commandline[30];
+    int n = file.read(commandline,30);
+    commandline[n] = '\0';
+    long second;
+    sscanf(commandline, ";FLAVOR:Marlin ;TIME:%ld", &second);
+    SERIAL_ECHOPGM("\xFF\xFF\xFF");
+    SERIAL_ECHOPGM("ilksayfa.r.txt=\"");
+    SERIAL_ECHO(second);
+    SERIAL_ECHOPGM("\"\xFF\xFF\xFF");
+    
 
     { // Don't remove this block, as the PORT_REDIRECT is a RAII
       PORT_REDIRECT(SerialMask::All);
