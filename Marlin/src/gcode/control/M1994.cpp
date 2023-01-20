@@ -7,17 +7,17 @@
 #include "../queue.h"
 #include "../../feature/power.h"
 #include "../../inc/MarlinConfig.h"
-int MKW= PE11;
-int MH= PE8;
 
-              // A KARIŞTIRMA START KONUMU
+int POOAM= PD10;
+int POABM= PE12;
+int POEBM= PD13;
 
-void GcodeSuite::M5000()
+void GcodeSuite::M1994()
 {
-  Serial.begin(250000);
-  pinMode(MKW, OUTPUT);
-  pinMode(MH, OUTPUT);
-  //-----------------------
-digitalWrite(MKW, HIGH);
-digitalWrite(MH, LOW);
+pinMode(POOAM, OUTPUT);
+pinMode(POABM, OUTPUT);
+pinMode(POEBM, OUTPUT);
+digitalWrite(POOAM, LOW);
+digitalWrite(POABM, HIGH);
+digitalWrite(POEBM, HIGH);
 }

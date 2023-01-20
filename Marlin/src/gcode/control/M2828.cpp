@@ -21,7 +21,7 @@ int SH= PE8;
 //---------------
 int rrr= PD13;
 //---------------
-//int er= PC5;
+
 
               // A-B KOMPONENT - STOP KONUMU
 
@@ -41,9 +41,6 @@ void GcodeSuite::M2828()
   pinMode(SH, OUTPUT);
   pinMode(rrr, OUTPUT);
   //-----------------------
-  //pinMode(er, OUTPUT);
-
-  //-----------------------
 digitalWrite(AS, LOW);
 digitalWrite(CS1, LOW);
 digitalWrite(MS1, LOW);
@@ -56,9 +53,4 @@ digitalWrite(SM, LOW);
 //-----------------------
 digitalWrite(SH, LOW);
 digitalWrite(rrr, LOW);
-//-----------------------
-//digitalWrite(er, LOW);
-//-----------------------
-Serial.println("ALL STOP");
-Serial.println("Enter New M or G Code");
 }

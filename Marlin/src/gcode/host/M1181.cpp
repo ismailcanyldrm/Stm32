@@ -1,7 +1,7 @@
 #include "../gcode.h"
 #include "../../core/serial.h"
 
-int Esp = PA5;
+int Esp = PE9;
 void GcodeSuite::M1181() {
   char *p = parser.string_arg;
 

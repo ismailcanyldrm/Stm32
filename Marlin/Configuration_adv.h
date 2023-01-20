@@ -674,7 +674,7 @@
  */
 #define CASE_LIGHT_ENABLE
 #if ENABLED(CASE_LIGHT_ENABLE)
-  #define CASE_LIGHT_PIN     PD13          // Override the default pin if needed PE11
+  #define CASE_LIGHT_PIN     PA7        // Override the default pin if needed PE11
   //#define INVERT_CASE_LIGHT false             // Set true if Case Light is ON when pin is LOW
   #define CASE_LIGHT_DEFAULT_ON true          // Set default power-up state on
   #define CASE_LIGHT_DEFAULT_BRIGHTNESS 255   // Set default power-up brightness (0-255, requires PWM pin)
@@ -994,7 +994,7 @@
 #if ENABLED(ASSISTED_TRAMMING)
 
   // Define positions for probe points.
-  #define TRAMMING_POINT_XY { {  160, 270 }, { 30,  30 }, { 270, 30 } }
+  #define TRAMMING_POINT_XY { {  160, 295 }, { 25,  25 }, { 295, 25 } }
 
   // Define position names for probe points.
   #define TRAMMING_POINT_NAME_1 "Back"

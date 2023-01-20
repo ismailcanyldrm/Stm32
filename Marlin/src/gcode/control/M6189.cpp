@@ -19,7 +19,7 @@ int MK1= PE11;
 //-----------------------
 int HH= PE8;
 //---------------
-//int roll= PC5;
+int RR= PD13;
 
               // A KOMPONENT - START KONUMU
 
@@ -38,11 +38,11 @@ void GcodeSuite::M6189()
   //-----------------------
   pinMode(HH, OUTPUT);
   //-----------------------
-  //pinMode(roll, OUTPUT);
+  pinMode(RR, OUTPUT);
   //-----------------------
 digitalWrite(AA, HIGH);
 digitalWrite(CA1, LOW);
-digitalWrite(MA1, HIGH);
+digitalWrite(MA1, LOW);
 //-----------------------
 digitalWrite(BA, LOW);
 digitalWrite(CA2, LOW);
@@ -52,8 +52,5 @@ digitalWrite(MK1, LOW);
 //-----------------------
 digitalWrite(HH, HIGH);
 //-----------------------
-//digitalWrite(roll, HIGH);
-//-----------------------
-Serial.println("Press button to START");
-Serial.println("A Comp. Motors");
+digitalWrite(RR, LOW);
 }

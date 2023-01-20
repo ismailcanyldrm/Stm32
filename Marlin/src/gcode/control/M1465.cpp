@@ -19,7 +19,7 @@ int MK5= PE11;
 //-----------------------
 int HCCC= PE8;
 //-----------------------
-//int rooou= PC5;
+int ROOO= PD13;
 
               // B-TEMİZLİK - START KONUMU
 
@@ -38,7 +38,7 @@ void GcodeSuite::M1465()
   //-----------------------
   pinMode(HCCC, OUTPUT);
   //-----------------------
-  //pinMode(rooou, OUTPUT);
+  pinMode(ROOO, OUTPUT);
   //-----------------------
 digitalWrite(ATTT, LOW);
 digitalWrite(CTTT1, LOW);
@@ -46,14 +46,11 @@ digitalWrite(MTTT1, LOW);
 //-----------------------
 digitalWrite(BTTT, LOW);
 digitalWrite(CTTT2, HIGH);
-digitalWrite(MTTT2, HIGH);
+digitalWrite(MTTT2, LOW);
 //-----------------------
 digitalWrite(MK5, LOW);
 //-----------------------
 digitalWrite(HCCC, LOW);
 //-----------------------
-//digitalWrite(rooou, HIGH);
-//-----------------------
-Serial.println("Press button to START");
-Serial.println("Clean B Comp. Tubes");
+digitalWrite(ROOO, LOW);
 }

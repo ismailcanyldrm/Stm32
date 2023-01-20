@@ -7,17 +7,17 @@
 #include "../queue.h"
 #include "../../feature/power.h"
 #include "../../inc/MarlinConfig.h"
-int MKW= PE11;
-int MH= PE8;
 
-              // A KARIŞTIRMA START KONUMU
+int PAM= PD10;
+int PBM= PE12;
+int PEM= PD13;
 
-void GcodeSuite::M5000()
+void GcodeSuite::M1996()
 {
-  Serial.begin(250000);
-  pinMode(MKW, OUTPUT);
-  pinMode(MH, OUTPUT);
-  //-----------------------
-digitalWrite(MKW, HIGH);
-digitalWrite(MH, LOW);
+pinMode(PAM, OUTPUT);
+pinMode(PBM, OUTPUT);
+pinMode(PEM, OUTPUT);
+digitalWrite(PAM, HIGH);
+digitalWrite(PBM, HIGH);
+digitalWrite(PEM, HIGH);
 }

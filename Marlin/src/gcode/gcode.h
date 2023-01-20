@@ -1224,7 +1224,7 @@ private:
 
   static void T(const int8_t tool_index);
 
-  static void M6100(); // FULL DENEME İÇİN
+
   static void M6161(); // A VE B BAŞLAT
   static void M6189(); // A BAŞLAT
   static void M6191(); // B BAŞLAT
@@ -1238,9 +1238,13 @@ private:
   static void M3434(); // HMI EKRAN DENEMESİ İÇİN SİLİNEBİLİR
   static void M1234(); // REZERVE SİLİNEBİLİR
   static void M2525(); // Filament izlemek için
+  static void M1994(); // B HAVA
+  static void M1996(); // A-B HAVA
+  static void M1998(); // A HAVA
   static void M1181();
-  static void M1071();
   static void M2023();
+  static void M1073();
+
 
 
 };

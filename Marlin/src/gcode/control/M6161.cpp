@@ -18,10 +18,8 @@ int M2= PE12;
 int MK= PE11; //karıştırma için
 //-----------------------
 int H= PE8;
-//------------------
-//int rr= PD13;
-//--------------------
-//int rol= PC5;
+//-----------------------
+int R= PD13; // basınç rölesi
 
               // A-B KOMPONENT - START KONUMU
 
@@ -39,24 +37,20 @@ void GcodeSuite::M6161()
   pinMode(MK, OUTPUT);
   //-----------------------
   pinMode(H, OUTPUT);
-  //pinMode(rr, OUTPUT);
+  pinMode(R, OUTPUT);
   //pinMode(rol, OUTPUT);
   //-----------------------
 digitalWrite(A, HIGH);
 digitalWrite(C1, LOW);
-digitalWrite(M1, HIGH);
+digitalWrite(M1, LOW);
 //-----------------------
 digitalWrite(B, HIGH);
 digitalWrite(C2, LOW);
-digitalWrite(M2, HIGH);
+digitalWrite(M2, LOW);
 //-----------------------
 digitalWrite(MK, LOW);
 //-----------------------
 digitalWrite(H, HIGH);
-//digitalWrite(rr, HIGH);
 //-----------------------
-//digitalWrite(rol, HIGH);
-//-----------------------
-Serial.println("Press button to START");
-Serial.println("Motors");
+digitalWrite(R, LOW);
 }

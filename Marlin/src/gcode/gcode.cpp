@@ -1065,7 +1065,6 @@ void GcodeSuite::process_parsed_command(const bool no_ok/*=false*/) {
       default: parser.unknown_command_warning(); break;
 
       #if ENABLED(CUSTOM) // Açıklamalar gcode.h'da
-        case 6100: M6100(); break;
         case 6161: M6161(); break;
         case 6189: M6189(); break;
         case 6191: M6191(); break;
@@ -1080,7 +1079,10 @@ void GcodeSuite::process_parsed_command(const bool no_ok/*=false*/) {
         case 1234: M1234(); break;
         case 2525: M2525(); break;  //FİLAMENT İZLEME KOMUTU
         case 1181: M1181(); break;
-        case 1071: M1071(); break; 
+        case 1994: M1994(); break;
+        case 1996: M1996(); break;
+        case 1998: M1998(); break;
+        case 1073: M1073(); break;
         case 2023: M2023(); break;
                                          // M1181: wifi modülüne kod göndermek için eklendi.
 

@@ -19,7 +19,7 @@ int MK3= PE11;
 //-----------------------
 int HC= PE8;
 //-----------------------
-//int rou= PC5;
+int RO= PD13;
 
               // TEMİZLİK - START KONUMU
 
@@ -38,22 +38,19 @@ void GcodeSuite::M1461()
   //-----------------------
   pinMode(HC, OUTPUT);
   //-----------------------
-  //pinMode(rou, OUTPUT);
+  pinMode(RO, OUTPUT);
   //-----------------------
 digitalWrite(AT, LOW);
 digitalWrite(CT1, HIGH);
-digitalWrite(MT1, HIGH);
+digitalWrite(MT1, LOW);
 //-----------------------
 digitalWrite(BT, LOW);
 digitalWrite(CT2, HIGH);
-digitalWrite(MT2, HIGH);
+digitalWrite(MT2, LOW);
 //-----------------------
 digitalWrite(MK3, LOW);
 //-----------------------
 digitalWrite(HC, LOW);
 //-----------------------
-//digitalWrite(rou, HIGH);
-//-----------------------
-Serial.println("Press button to START");
-Serial.println("Clean Tubes");
+digitalWrite(RO, LOW);
 }
