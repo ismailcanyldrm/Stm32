@@ -19,7 +19,7 @@ int MK1= PE11;
 //-----------------------
 int HH= PE8;
 //---------------
-int RR= PD13;
+//int RR= PD13;
 
               // A KOMPONENT - START KONUMU
 
@@ -38,7 +38,7 @@ void GcodeSuite::M6189()
   //-----------------------
   pinMode(HH, OUTPUT);
   //-----------------------
-  pinMode(RR, OUTPUT);
+  //pinMode(RR, OUTPUT);
   //-----------------------
 digitalWrite(AA, HIGH);
 digitalWrite(CA1, LOW);
@@ -52,5 +52,5 @@ digitalWrite(MK1, LOW);
 //-----------------------
 digitalWrite(HH, HIGH);
 //-----------------------
-digitalWrite(RR, LOW);
+//digitalWrite(RR, LOW);
 }

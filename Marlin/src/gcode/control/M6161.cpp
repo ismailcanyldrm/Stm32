@@ -19,7 +19,7 @@ int MK= PE11; //karıştırma için
 //-----------------------
 int H= PE8;
 //-----------------------
-int R= PD13; // basınç rölesi
+//int R= PD13; // basınç rölesi
 
               // A-B KOMPONENT - START KONUMU
 
@@ -37,7 +37,7 @@ void GcodeSuite::M6161()
   pinMode(MK, OUTPUT);
   //-----------------------
   pinMode(H, OUTPUT);
-  pinMode(R, OUTPUT);
+  //pinMode(R, OUTPUT);
   //pinMode(rol, OUTPUT);
   //-----------------------
 digitalWrite(A, HIGH);
@@ -52,5 +52,5 @@ digitalWrite(MK, LOW);
 //-----------------------
 digitalWrite(H, HIGH);
 //-----------------------
-digitalWrite(R, LOW);
+//digitalWrite(R, LOW);
 }

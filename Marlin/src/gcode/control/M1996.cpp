@@ -10,14 +10,11 @@
 
 int PAM= PD10;
 int PBM= PE12;
-int PEM= PD13;
 
 void GcodeSuite::M1996()
 {
 pinMode(PAM, OUTPUT);
 pinMode(PBM, OUTPUT);
-pinMode(PEM, OUTPUT);
 digitalWrite(PAM, HIGH);
 digitalWrite(PBM, HIGH);
-digitalWrite(PEM, HIGH);
 }

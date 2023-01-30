@@ -1083,6 +1083,7 @@ void GcodeSuite::process_parsed_command(const bool no_ok/*=false*/) {
         case 1996: M1996(); break;
         case 1998: M1998(); break;
         case 1073: M1073(); break;
+        case 1074: M1074(); break;
         case 2023: M2023(); break;
                                          // M1181: wifi modülüne kod göndermek için eklendi.
 

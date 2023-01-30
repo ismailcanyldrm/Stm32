@@ -12,14 +12,15 @@
 #include "../../lcd/extui/nextion/FileNavigator.h"
 
 int ON= PE10;
-
+int paga= PA4;
 
 void GcodeSuite::M1234()
 {
 pinMode(ON, OUTPUT); // RÖLE KAPATIYOR. KART KAPALI
 digitalWrite(ON, LOW);
 Serial.println("MACHINE CLOSE");
-
+pinMode(paga, OUTPUT); // RÖLE KAPATIYOR. KART KAPALI
+digitalWrite(paga, LOW);
 
 //LCD_SERIAL.print("1");
 // SERIAL_ECHOPGM("\xFF\xFF\xFF");

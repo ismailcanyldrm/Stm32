@@ -10,14 +10,11 @@
 
 int POOAM= PD10;
 int POABM= PE12;
-int POEBM= PD13;
 
 void GcodeSuite::M1994()
 {
 pinMode(POOAM, OUTPUT);
 pinMode(POABM, OUTPUT);
-pinMode(POEBM, OUTPUT);
 digitalWrite(POOAM, LOW);
 digitalWrite(POABM, HIGH);
-digitalWrite(POEBM, HIGH);
 }

@@ -19,7 +19,7 @@ int MK3= PE11;
 //-----------------------
 int HC= PE8;
 //-----------------------
-int RO= PD13;
+//int RO= PD13;
 
               // TEMİZLİK - START KONUMU
 
@@ -38,7 +38,7 @@ void GcodeSuite::M1461()
   //-----------------------
   pinMode(HC, OUTPUT);
   //-----------------------
-  pinMode(RO, OUTPUT);
+  //pinMode(RO, OUTPUT);
   //-----------------------
 digitalWrite(AT, LOW);
 digitalWrite(CT1, HIGH);
@@ -52,5 +52,5 @@ digitalWrite(MK3, LOW);
 //-----------------------
 digitalWrite(HC, LOW);
 //-----------------------
-digitalWrite(RO, LOW);
+//digitalWrite(RO, LOW);
 }

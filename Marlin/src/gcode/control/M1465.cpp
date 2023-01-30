@@ -19,7 +19,7 @@ int MK5= PE11;
 //-----------------------
 int HCCC= PE8;
 //-----------------------
-int ROOO= PD13;
+//int ROOO= PD13;
 
               // B-TEMİZLİK - START KONUMU
 
@@ -38,7 +38,7 @@ void GcodeSuite::M1465()
   //-----------------------
   pinMode(HCCC, OUTPUT);
   //-----------------------
-  pinMode(ROOO, OUTPUT);
+  //pinMode(ROOO, OUTPUT);
   //-----------------------
 digitalWrite(ATTT, LOW);
 digitalWrite(CTTT1, LOW);
@@ -52,5 +52,5 @@ digitalWrite(MK5, LOW);
 //-----------------------
 digitalWrite(HCCC, LOW);
 //-----------------------
-digitalWrite(ROOO, LOW);
+//digitalWrite(ROOO, LOW);
 }

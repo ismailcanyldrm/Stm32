@@ -19,9 +19,10 @@ int SM= PE11;
 //-----------------------
 int SH= PE8;
 //---------------
-int rrr= PD13;
+//int rrr= PD13;
 //---------------
-
+int m1= PA5;
+int m2= PA6;
 
               // A-B KOMPONENT - STOP KONUMU
 
@@ -39,7 +40,10 @@ void GcodeSuite::M2828()
   pinMode(SM, OUTPUT);
   //-----------------------
   pinMode(SH, OUTPUT);
-  pinMode(rrr, OUTPUT);
+  //pinMode(rrr, OUTPUT);
+  //-----------------------
+  pinMode(m1, OUTPUT);
+  pinMode(m2, OUTPUT);
   //-----------------------
 digitalWrite(AS, LOW);
 digitalWrite(CS1, LOW);
@@ -52,5 +56,9 @@ digitalWrite(MS2, LOW);
 digitalWrite(SM, LOW);
 //-----------------------
 digitalWrite(SH, LOW);
-digitalWrite(rrr, LOW);
+//digitalWrite(rrr, LOW);
+//-----------------------
+digitalWrite(m1, LOW);
+digitalWrite(m2, LOW);
+
 }

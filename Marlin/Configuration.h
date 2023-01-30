@@ -930,7 +930,7 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 39.95, 39.95, 400, 195 } // 160 160 800 831,30 bunların tam yarısı aslında ideal olan. eski-bugra: { 39.704, 39.704, 400, 201.37 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 39.90, 39.90, 400, 195 } // 160 160 800 831,30 bunların tam yarısı aslında ideal olan. eski-bugra: { 39.704, 39.704, 400, 201.37 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -994,7 +994,7 @@
   #endif
 #endif
 
-#define DEFAULT_EJERK    5.0  // May be used by Linear Advance
+#define DEFAULT_EJERK    10.0  // May be used by Linear Advance  eski: 5.0
 
 /**
  * Junction Deviation Factor
@@ -1017,7 +1017,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-#define S_CURVE_ACCELERATION
+//#define S_CURVE_ACCELERATION
 
 //===========================================================================
 //============================= Z Probe Options =============================

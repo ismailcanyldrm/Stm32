@@ -9,11 +9,12 @@
 #include "../../inc/MarlinConfig.h"
 
 int OFF= PE10;
-
+int paa4= PA4;
 void GcodeSuite::M3434()
 {
 pinMode(OFF, OUTPUT); // RÖLE AÇIYOR. KART AÇIK
 digitalWrite(OFF, HIGH);
+pinMode(paa4, OUTPUT); // RÖLE AÇIYOR. KART AÇIK
+digitalWrite(paa4, HIGH);
 Serial.println("MACHINE OPEN");
-
 }
