@@ -27,6 +27,10 @@
 #include "../gcode.h"
 #include "../../sd/cardreader.h"
 
+#if ENABLED(DWIN_LCD_PROUI)
+  #include "../../lcd/e3v2/proui/dwin.h"
+#endif
+
 /**
  * M524: Abort the current SD print job (started with M24)
  */
@@ -34,10 +38,18 @@ void GcodeSuite::M524() {
   SERIAL_ECHOPGM("\xFF\xFF\xFF");
   SERIAL_ECHOPGM("t10.txt=\"Aborting print...\"");
   SERIAL_ECHOPGM("\xFF\xFF\xFF");
-  if (IS_SD_PRINTING())
-    card.abortFilePrintSoon();
-  else if (card.isMounted())
-    card.closefile();
+  #if ENABLED(DWIN_LCD_PROUI)
+
+    HMI_flag.abort_flag = true;    // The LCD will handle it
+
+  #else
+
+    if (IS_SD_PRINTING())
+      card.abortFilePrintSoon();
+    else if (card.isMounted())
+      card.closefile();
+
+  #endif
 
 }
 

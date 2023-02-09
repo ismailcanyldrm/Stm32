@@ -248,7 +248,7 @@ void GCodeParser::parse(char *p) {
         case 'R': if (!WITHIN(motion_mode_codenum, 2, 3)) return;
       #endif
 
-      LOGICAL_AXIS_GANG(case 'E':, case 'X':, case 'Y':, case 'Z':, case AXIS4_NAME:, case AXIS5_NAME:, case AXIS6_NAME:)
+      LOGICAL_AXIS_GANG(case 'E':, case 'X':, case 'Y':, case 'Z':, case AXIS4_NAME:, case AXIS5_NAME:, case AXIS6_NAME:, case AXIS7_NAME:, case AXIS8_NAME:, case AXIS9_NAME:)
       case 'F':
         if (motion_mode_codenum < 0) return;
         command_letter = 'G';
@@ -345,7 +345,7 @@ void GCodeParser::parse(char *p) {
         #endif
       }
 
-      if (TERN0(DEBUG_GCODE_PARSER, debug)) /*SERIAL_EOL()*/;
+      if (TERN0(DEBUG_GCODE_PARSER, debug)) SERIAL_EOL();
 
       TERN_(FASTER_GCODE_PARSER, set(param, valptr)); // Set parameter exists and pointer (nullptr for no value)
     }

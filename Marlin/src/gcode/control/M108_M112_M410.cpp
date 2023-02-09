@@ -34,7 +34,6 @@
 void GcodeSuite::M108() {
   TERN_(HAS_RESUME_CONTINUE, wait_for_user = false);
   wait_for_heatup = false;
-  wait_for_user = false;
 }
 
 /**

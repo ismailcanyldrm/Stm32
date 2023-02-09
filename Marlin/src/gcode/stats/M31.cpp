@@ -31,11 +31,9 @@
  */
 void GcodeSuite::M31() {
   char buffer[22];
-
   duration_t(print_job_timer.duration()).toString(buffer);
 
-  ui.set_status(buffer);
+  ui.set_status(buffer, ENABLED(DWIN_LCD_PROUI));
 
-    SERIAL_ECHO_MSG("Print time: ", buffer);
-
+  SERIAL_ECHO_MSG("Print time: ", buffer);
 }

@@ -121,8 +121,15 @@
 #define TEMP_CHAMBER_PIN                    PA2
 
 
-
-
+/*
+#if HOTENDS == 1 && !REDUNDANT_TEMP_MATCH(SOURCE, E1)
+  #if TEMP_SENSOR_PROBE
+    #define TEMP_PROBE_PIN            TEMP_1_PIN
+  #elif TEMP_SENSOR_CHAMBER
+    #define TEMP_CHAMBER_PIN          TEMP_1_PIN
+  #endif
+#endif
+*/
 //
 // Heaters / Fans
 //
@@ -173,6 +180,23 @@
   #endif
 
 
+
+/*
+#if ENABLED(MKS_PWC)
+  #if ENABLED(TFT_LVGL_UI)
+    #if ENABLED(PSU_CONTROL)
+      #error "PSU_CONTROL is incompatible with MKS_PWC plus TFT_LVGL_UI."
+    #endif
+    #undef MKS_PWC
+    #define SUICIDE_PIN                     PB2
+    #define SUICIDE_PIN_STATE               LOW
+  #else
+    #define PS_ON_PIN                       PB2   // PW_OFF
+  #endif
+  #define KILL_PIN                          PA13  // PW_DET
+  #define KILL_PIN_STATE                    HIGH
+#endif
+*/
 // Random Info
 #define USB_SERIAL              -1  // USB Serial
 #define WIFI_SERIAL              3  // USART3
@@ -212,7 +236,7 @@
 
 #define SPI_FLASH
 #if ENABLED(SPI_FLASH)
-  #define HAS_SPI_FLASH                        1
+  #define SPI_FLASH
   #define SPI_DEVICE                           2
   #define SPI_FLASH_SIZE               0x1000000
   #define SPI_FLASH_CS_PIN                  PB12 //PB12
@@ -363,6 +387,11 @@
   #endif // !MKS_MINI_12864
 
 #endif // HAS_WIRED_LCD
+
+#if HAS_TFT_LVGL_UI
+  // Enable SPI DMA, this requires button pins, thus no buttons. Default is DISABLED.
+  //#define USE_SPI_DMA_TC
+#endif
 
 #if ANY(TFT_COLOR_UI, TFT_LVGL_UI, TFT_CLASSIC_UI, HAS_WIRED_LCD)
   #define BEEPER_PIN                 EXP1_10_PIN

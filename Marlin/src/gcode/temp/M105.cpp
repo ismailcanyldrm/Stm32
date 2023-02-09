@@ -37,7 +37,7 @@ void GcodeSuite::M105() {
 
     thermalManager.print_heater_states(target_extruder OPTARG(HAS_TEMP_REDUNDANT, parser.boolval('R')));
 
-    //SERIAL_EOL();
+    SERIAL_EOL();
 
   #else
 

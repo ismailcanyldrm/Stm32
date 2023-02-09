@@ -31,7 +31,6 @@
  *  Pn  Redirect to another serial port
  *        0 : Announce to all ports
  *      1-9 : Serial ports 1 to 9
- * 
  */
 int x = 0;
 int y = 0;

@@ -33,15 +33,10 @@
 #include "../gcode/gcode.h"
 
 #if ENABLED(TMC_DEBUG)
-  #include "../module/planner.h"
   #include "../libs/hex_print.h"
   #if ENABLED(MONITOR_DRIVER_STATUS)
     static uint16_t report_tmc_status_interval; // = 0
   #endif
-#endif
-
-#if HAS_LCD_MENU
-  #include "../module/stepper.h"
 #endif
 
 /**
@@ -222,7 +217,7 @@
     duration_t elapsed = print_job_timer.duration();
     const bool has_days = (elapsed.value > 60*60*24L);
     (void)elapsed.toDigital(timestamp, has_days);
-   // SERIAL_EOL();
+    SERIAL_EOL();
     SERIAL_ECHO(timestamp);
     SERIAL_ECHOPGM(": ");
     st.printLabel();
@@ -296,7 +291,7 @@
 
       #if ENABLED(STOP_ON_ERROR)
         if (st.error_count >= 10) {
-          //SERIAL_EOL();
+          SERIAL_EOL();
           st.printLabel();
           report_driver_error(data);
         }
@@ -421,15 +416,25 @@
         if (monitor_tmc_driver(stepperI, need_update_error_counters, need_debug_reporting))
           step_current_down(stepperI);
       #endif
-
       #if AXIS_IS_TMC(J)
         if (monitor_tmc_driver(stepperJ, need_update_error_counters, need_debug_reporting))
           step_current_down(stepperJ);
       #endif
-
       #if AXIS_IS_TMC(K)
         if (monitor_tmc_driver(stepperK, need_update_error_counters, need_debug_reporting))
           step_current_down(stepperK);
+      #endif
+      #if AXIS_IS_TMC(U)
+        if (monitor_tmc_driver(stepperU, need_update_error_counters, need_debug_reporting))
+          step_current_down(stepperU);
+      #endif
+      #if AXIS_IS_TMC(V)
+        if (monitor_tmc_driver(stepperV, need_update_error_counters, need_debug_reporting))
+          step_current_down(stepperV);
+      #endif
+      #if AXIS_IS_TMC(W)
+        if (monitor_tmc_driver(stepperW, need_update_error_counters, need_debug_reporting))
+          step_current_down(stepperW);
       #endif
 
       #if AXIS_IS_TMC(E0)
@@ -457,7 +462,7 @@
         (void)monitor_tmc_driver(stepperE7, need_update_error_counters, need_debug_reporting);
       #endif
 
-      if (TERN0(TMC_DEBUG, need_debug_reporting)) //SERIAL_EOL();
+      if (TERN0(TMC_DEBUG, need_debug_reporting)) SERIAL_EOL();
     }
   }
 
@@ -761,7 +766,7 @@
         SERIAL_CHAR('\t');
         print_hex_long(drv_status, ':');
         if (drv_status == 0xFFFFFFFF || drv_status == 0) SERIAL_ECHOPGM("\t Bad response!");
-        //SERIAL_EOL();
+        SERIAL_EOL();
         break;
       }
       default: _tmc_parse_drv_status(st, i); break;
@@ -811,6 +816,15 @@
     #if AXIS_IS_TMC(K)
       if (k) tmc_status(stepperK, n);
     #endif
+    #if AXIS_IS_TMC(U)
+      if (u) tmc_status(stepperU, n);
+    #endif
+    #if AXIS_IS_TMC(V)
+      if (v) tmc_status(stepperV, n);
+    #endif
+    #if AXIS_IS_TMC(W)
+      if (w) tmc_status(stepperW, n);
+    #endif
 
     if (TERN0(HAS_EXTRUDERS, e)) {
       #if AXIS_IS_TMC(E0)
@@ -839,7 +853,7 @@
       #endif
     }
 
-    //SERIAL_EOL();
+    SERIAL_EOL();
   }
 
   static void drv_status_loop(const TMC_drv_status_enum n, LOGICAL_AXIS_ARGS(const bool)) {
@@ -885,6 +899,15 @@
     #if AXIS_IS_TMC(K)
       if (k) tmc_parse_drv_status(stepperK, n);
     #endif
+    #if AXIS_IS_TMC(U)
+      if (u) tmc_parse_drv_status(stepperU, n);
+    #endif
+    #if AXIS_IS_TMC(V)
+      if (v) tmc_parse_drv_status(stepperV, n);
+    #endif
+    #if AXIS_IS_TMC(W)
+      if (w) tmc_parse_drv_status(stepperW, n);
+    #endif
 
     if (TERN0(HAS_EXTRUDERS, e)) {
       #if AXIS_IS_TMC(E0)
@@ -913,7 +936,7 @@
       #endif
     }
 
-    //SERIAL_EOL();
+    SERIAL_EOL();
   }
 
   /**
@@ -990,7 +1013,7 @@
       DRV_REPORT("s2vsb\t",          TMC_S2VSB);
     #endif
     DRV_REPORT("Driver registers:\n",TMC_DRV_STATUS_HEX);
-    //SERIAL_EOL();
+    SERIAL_EOL();
   }
 
   #define PRINT_TMC_REGISTER(REG_CASE) case TMC_GET_##REG_CASE: print_hex_long(st.REG_CASE(), ':'); break
@@ -1090,6 +1113,15 @@
     #if AXIS_IS_TMC(K)
       if (k) tmc_get_registers(stepperK, n);
     #endif
+    #if AXIS_IS_TMC(U)
+      if (u) tmc_get_registers(stepperU, n);
+    #endif
+    #if AXIS_IS_TMC(V)
+      if (v) tmc_get_registers(stepperV, n);
+    #endif
+    #if AXIS_IS_TMC(W)
+      if (w) tmc_get_registers(stepperW, n);
+    #endif
 
     if (TERN0(HAS_EXTRUDERS, e)) {
       #if AXIS_IS_TMC(E0)
@@ -1118,7 +1150,7 @@
       #endif
     }
 
-    //SERIAL_EOL();
+    SERIAL_EOL();
   }
 
   void tmc_get_registers(LOGICAL_AXIS_ARGS(bool)) {
@@ -1179,69 +1211,6 @@
   void tmc_disable_stallguard(TMC2660Stepper, const bool) {};
 
 #endif // USE_SENSORLESS
-
-#if HAS_TMC_SPI
-  #define SET_CS_PIN(st) OUT_WRITE(st##_CS_PIN, HIGH)
-  void tmc_init_cs_pins() {
-    #if AXIS_HAS_SPI(X)
-      SET_CS_PIN(X);
-    #endif
-    #if AXIS_HAS_SPI(Y)
-      SET_CS_PIN(Y);
-    #endif
-    #if AXIS_HAS_SPI(Z)
-      SET_CS_PIN(Z);
-    #endif
-    #if AXIS_HAS_SPI(X2)
-      SET_CS_PIN(X2);
-    #endif
-    #if AXIS_HAS_SPI(Y2)
-      SET_CS_PIN(Y2);
-    #endif
-    #if AXIS_HAS_SPI(Z2)
-      SET_CS_PIN(Z2);
-    #endif
-    #if AXIS_HAS_SPI(Z3)
-      SET_CS_PIN(Z3);
-    #endif
-    #if AXIS_HAS_SPI(Z4)
-      SET_CS_PIN(Z4);
-    #endif
-    #if AXIS_HAS_SPI(I)
-      SET_CS_PIN(I);
-    #endif
-    #if AXIS_HAS_SPI(J)
-      SET_CS_PIN(J);
-    #endif
-    #if AXIS_HAS_SPI(K)
-      SET_CS_PIN(K);
-    #endif
-    #if AXIS_HAS_SPI(E0)
-      SET_CS_PIN(E0);
-    #endif
-    #if AXIS_HAS_SPI(E1)
-      SET_CS_PIN(E1);
-    #endif
-    #if AXIS_HAS_SPI(E2)
-      SET_CS_PIN(E2);
-    #endif
-    #if AXIS_HAS_SPI(E3)
-      SET_CS_PIN(E3);
-    #endif
-    #if AXIS_HAS_SPI(E4)
-      SET_CS_PIN(E4);
-    #endif
-    #if AXIS_HAS_SPI(E5)
-      SET_CS_PIN(E5);
-    #endif
-    #if AXIS_HAS_SPI(E6)
-      SET_CS_PIN(E6);
-    #endif
-    #if AXIS_HAS_SPI(E7)
-      SET_CS_PIN(E7);
-    #endif
-  }
-#endif // HAS_TMC_SPI
 
 template<typename TMC>
 static bool test_connection(TMC &st) {
@@ -1309,6 +1278,15 @@ void test_tmc_connection(LOGICAL_AXIS_ARGS(const bool)) {
   #if AXIS_IS_TMC(K)
     if (k) axis_connection += test_connection(stepperK);
   #endif
+  #if AXIS_IS_TMC(U)
+    if (u) axis_connection += test_connection(stepperU);
+  #endif
+  #if AXIS_IS_TMC(V)
+    if (v) axis_connection += test_connection(stepperV);
+  #endif
+  #if AXIS_IS_TMC(W)
+    if (w) axis_connection += test_connection(stepperW);
+  #endif
 
   if (TERN0(HAS_EXTRUDERS, e)) {
     #if AXIS_IS_TMC(E0)
@@ -1341,3 +1319,75 @@ void test_tmc_connection(LOGICAL_AXIS_ARGS(const bool)) {
 }
 
 #endif // HAS_TRINAMIC_CONFIG
+
+#if HAS_TMC_SPI
+  #define SET_CS_PIN(st) OUT_WRITE(st##_CS_PIN, HIGH)
+  void tmc_init_cs_pins() {
+    #if AXIS_HAS_SPI(X)
+      SET_CS_PIN(X);
+    #endif
+    #if AXIS_HAS_SPI(Y)
+      SET_CS_PIN(Y);
+    #endif
+    #if AXIS_HAS_SPI(Z)
+      SET_CS_PIN(Z);
+    #endif
+    #if AXIS_HAS_SPI(X2)
+      SET_CS_PIN(X2);
+    #endif
+    #if AXIS_HAS_SPI(Y2)
+      SET_CS_PIN(Y2);
+    #endif
+    #if AXIS_HAS_SPI(Z2)
+      SET_CS_PIN(Z2);
+    #endif
+    #if AXIS_HAS_SPI(Z3)
+      SET_CS_PIN(Z3);
+    #endif
+    #if AXIS_HAS_SPI(Z4)
+      SET_CS_PIN(Z4);
+    #endif
+    #if AXIS_HAS_SPI(I)
+      SET_CS_PIN(I);
+    #endif
+    #if AXIS_HAS_SPI(J)
+      SET_CS_PIN(J);
+    #endif
+    #if AXIS_HAS_SPI(K)
+      SET_CS_PIN(K);
+    #endif
+    #if AXIS_HAS_SPI(U)
+      SET_CS_PIN(U);
+    #endif
+    #if AXIS_HAS_SPI(V)
+      SET_CS_PIN(V);
+    #endif
+    #if AXIS_HAS_SPI(W)
+      SET_CS_PIN(W);
+    #endif
+    #if AXIS_HAS_SPI(E0)
+      SET_CS_PIN(E0);
+    #endif
+    #if AXIS_HAS_SPI(E1)
+      SET_CS_PIN(E1);
+    #endif
+    #if AXIS_HAS_SPI(E2)
+      SET_CS_PIN(E2);
+    #endif
+    #if AXIS_HAS_SPI(E3)
+      SET_CS_PIN(E3);
+    #endif
+    #if AXIS_HAS_SPI(E4)
+      SET_CS_PIN(E4);
+    #endif
+    #if AXIS_HAS_SPI(E5)
+      SET_CS_PIN(E5);
+    #endif
+    #if AXIS_HAS_SPI(E6)
+      SET_CS_PIN(E6);
+    #endif
+    #if AXIS_HAS_SPI(E7)
+      SET_CS_PIN(E7);
+    #endif
+  }
+#endif // HAS_TMC_SPI
