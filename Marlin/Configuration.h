@@ -1,4 +1,5 @@
 /**
+ * Marlin 2.0.9.3 bug-fix version //ismail can yıldırım
  * Marlin 3D Printer Firmware---------------------------Neckog kart yazılımı 01.10.22 g34-35-28 hız vs ayarları yapıldı(13.10.22)
  * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
