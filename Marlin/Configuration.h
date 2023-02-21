@@ -1,5 +1,4 @@
 /**
- * Marlin 2.1.2.0 güncellendi -ismail can yıldırım -09.02.2023
  * Marlin 3D Printer Firmware
  * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
@@ -1164,7 +1163,7 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 39.90, 39.90, 400, 195 } // 160 160 800 831,30 bunların tam yarısı aslında ideal olan. eski-bugra: { 39.704, 39.704, 400, 201.37 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 40.50, 40.50, 400, 197 } // 160 160 800 831,30 bunların tam yarısı aslında ideal olan. eski-bugra: { 39.704, 39.704, 400, 201.37 }
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
@@ -1199,9 +1198,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  4500    // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION   4500    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)
@@ -1213,9 +1212,9 @@
  */
 #define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
-  #define DEFAULT_XJERK 10
-  #define DEFAULT_YJERK 10
-  #define DEFAULT_ZJERK  0.3
+  #define DEFAULT_XJERK 8
+  #define DEFAULT_YJERK 8
+  #define DEFAULT_ZJERK  0.2
   //#define DEFAULT_IJERK  0.3
   //#define DEFAULT_JJERK  0.3
   //#define DEFAULT_KJERK  0.3
@@ -1231,7 +1230,7 @@
   #endif
 #endif
 
-#define DEFAULT_EJERK    10.0  // May be used by Linear Advance  eski: 5.0
+#define DEFAULT_EJERK    8  // May be used by Linear Advance  eski: 5.0
 
 /**
  * Junction Deviation Factor
@@ -1254,7 +1253,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-//#define S_CURVE_ACCELERATION
+#define S_CURVE_ACCELERATION
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -1649,8 +1648,8 @@
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR true
-#define INVERT_E1_DIR false
+#define INVERT_E0_DIR true //true yapıldı. 06.02.2023 (bugra)
+#define INVERT_E1_DIR true
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
 #define INVERT_E4_DIR false
@@ -1690,9 +1689,9 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 320
-#define Y_BED_SIZE 320
-#define Z_BED_SIZE 410
+#define X_BED_SIZE 315
+#define Y_BED_SIZE 315
+#define Z_BED_SIZE 405
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0

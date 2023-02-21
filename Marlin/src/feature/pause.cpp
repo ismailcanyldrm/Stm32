@@ -37,7 +37,7 @@
 #include "../module/planner.h"
 #include "../module/printcounter.h"
 #include "../module/temperature.h"
-
+#include "../module/endstops.h"
 #if HAS_EXTRUDERS
   #include "../module/stepper.h"
 #endif
@@ -220,6 +220,7 @@ bool load_filament(const_float_t slow_load_length/*=0*/, const_float_t fast_load
           if (READ(FIL_RUNOUT_PIN) != FIL_RUNOUT_STATE) wait_for_user = false;
         #endif
       #endif
+      wait_for_user = false; // @ismailcanyldrm
       idle_no_sleep();
     }
   }
@@ -469,9 +470,10 @@ bool pause_print(const_float_t retract, const xyz_pos_t &park_point, const bool 
   #endif
 
   // Unload the filament, if specified
-  if (unload_length)
+  if (unload_length){
     unload_filament(unload_length, show_lcd, PAUSE_MODE_CHANGE_FILAMENT);
-
+    endstops.filament(); //filament okuma 25.11.2022
+  }
   TERN_(DUAL_X_CARRIAGE, set_duplication_enabled(saved_ext_dup_mode, saved_ext));
 
   // Disable the Extruder for manual change
@@ -604,6 +606,16 @@ void wait_for_confirmation(const bool is_reload/*=false*/, const int8_t max_beep
 void resume_print(const_float_t slow_load_length/*=0*/, const_float_t fast_load_length/*=0*/, const_float_t purge_length/*=ADVANCED_PAUSE_PURGE_LENGTH*/, const int8_t max_beep_count/*=0*/, const celsius_t targetTemp/*=0*/ DXC_ARGS) {
   DEBUG_SECTION(rp, "resume_print", true);
   DEBUG_ECHOLNPGM("... slowlen:", slow_load_length, " fastlen:", fast_load_length, " purgelen:", purge_length, " maxbeep:", max_beep_count, " targetTemp:", targetTemp DXC_SAY);
+  endstops.filament(); // filament okuma 25.11.22
+  SERIAL_ECHOPGM("\xFF\xFF\xFF");
+  SERIAL_ECHOPGM("t10.txt=\"Resume process started...\"");
+  SERIAL_ECHOPGM("\xFF\xFF\xFF");
+
+  SERIAL_ECHOPGM("\xFF\xFF\xFF");
+  SERIAL_ECHOPGM("b9.aph=0");
+  SERIAL_ECHOPGM("\xFF\xFF\xFF");
+
+
 
   /*
   SERIAL_ECHOLNPGM(
@@ -698,6 +710,13 @@ void resume_print(const_float_t slow_load_length/*=0*/, const_float_t fast_load_
   #if ENABLED(SDSUPPORT)
     if (did_pause_print) {
       --did_pause_print;
+
+      SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      SERIAL_ECHOPGM("b7.aph=127");
+      SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      SERIAL_ECHOPGM("t10.txt=\"Print continue...\"");
+      SERIAL_ECHOPGM("\xFF\xFF\xFF");
       card.startOrResumeFilePrinting();
       // Write PLR now to update the z axis value
       TERN_(POWER_LOSS_RECOVERY, if (recovery.enabled) recovery.save(true));

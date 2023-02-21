@@ -174,7 +174,7 @@ void GcodeSuite::G35() {
         SERIAL_ECHOPGM("\xFF\xFF\xFF");
         SERIAL_ECHOPGM("t40.txt=\"",ABS(full_turns) , " Turns"," and ", "", ABS(minutes), " Degree\n\"");
         SERIAL_ECHOPGM("\xFF\xFF\xFF");
-        if ( (screw_thread & 1) == (adjust > 0)){
+        if ( (screw_thread & 1) != (adjust > 0)){
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
           SERIAL_ECHOPGM("p1.pic=171");
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
@@ -349,7 +349,7 @@ void GcodeSuite::G35() {
         SERIAL_ECHOPGM("\xFF\xFF\xFF");
         SERIAL_ECHOPGM("t41.txt=\"","Turn ","",(char *)pgm_read_ptr(&tramming_point_name[1]), (screw_thread & 1) == (adjust > 0) ? "CCW" : "CW", " by ", "", ABS(full_turns) , " turns"," and ", "", ABS(minutes), " degree\n\"");
         SERIAL_ECHOPGM("\xFF\xFF\xFF");
-        if ( (screw_thread & 1) == (adjust > 0)){
+        if ( (screw_thread & 1) != (adjust > 0)){
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
           SERIAL_ECHOPGM("p0.pic=171");
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
@@ -528,6 +528,9 @@ void GcodeSuite::G35() {
         x=+1;
 
       }
+      SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      SERIAL_ECHOPGM("x.val=1");
+      SERIAL_ECHOPGM("\xFF\xFF\xFF");
       if (ENABLED(REPORT_TRAMMING_MM)) SERIAL_ECHOPGM(" (", -diff, "mm)");
       SERIAL_EOL();
     }

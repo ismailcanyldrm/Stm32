@@ -952,6 +952,9 @@ G29_TYPE GcodeSuite::G29() {
   TERN_(HAS_MULTI_HOTEND, if (abl.tool_index != 0) tool_change(abl.tool_index));
 
   report_current_position();
+  SERIAL_ECHOPGM("\xFF\xFF\xFF");
+  SERIAL_ECHOPGM("x.val=1");
+  SERIAL_ECHOPGM("\xFF\xFF\xFF");
 
   G29_RETURN(isnan(abl.measured_z), true);
 }

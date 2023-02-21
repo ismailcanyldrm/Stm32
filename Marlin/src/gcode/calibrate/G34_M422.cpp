@@ -293,9 +293,9 @@ void GcodeSuite::G34() {
             )
           );
         #endif
-
-        SERIAL_ECHOLNPGM("\n"
-          "Z2-Z1=", ABS(z_measured[1] - z_measured[0])
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+        SERIAL_ECHOPGM("t1071.txt=\"","Z2-Z1=","",ABS(z_measured[1] - z_measured[0]),"\"");
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
           #if TRIPLE_Z
             , " Z3-Z2=", ABS(z_measured[2] - z_measured[1])
             , " Z3-Z1=", ABS(z_measured[2] - z_measured[0])
@@ -305,7 +305,6 @@ void GcodeSuite::G34() {
               , " Z4-Z1=", ABS(z_measured[3] - z_measured[0])
             #endif
           #endif
-        );
 
         #if HAS_STATUS_MESSAGE
           char fstr1[10];
@@ -429,6 +428,9 @@ void GcodeSuite::G34() {
       else {
         SERIAL_ECHOLNPGM("Did ", iteration + (iteration != z_auto_align_iterations), " of ", z_auto_align_iterations);
         SERIAL_ECHOLNPAIR_F("Accuracy: ", z_maxdiff);
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+        SERIAL_ECHOPGM("x.val=1");
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
       }
 
       // Stow the probe because the last call to probe.probe_at_point(...)
