@@ -24,7 +24,7 @@
 
 #if ENABLED(HOST_ACTION_COMMANDS)
 
-//#define DEBUG_HOST_ACTIONS
+#define DEBUG_HOST_ACTIONS
 
 #include "host_actions.h"
 
