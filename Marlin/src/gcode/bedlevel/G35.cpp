@@ -169,354 +169,394 @@ void GcodeSuite::G35() {
          
       
       if (x == 1){
-        SERIAL_ECHOPGM("\xFF\xFF\xFF");
-        SERIAL_ECHOPGM("t4.txt=\"","Turn ","",(char *)pgm_read_ptr(&tramming_point_name[2]), (screw_thread & 1) == (adjust > 0) ? "CCW" : "CW","\n\"") ;
-        SERIAL_ECHOPGM("\xFF\xFF\xFF");
-        SERIAL_ECHOPGM("t40.txt=\"",ABS(full_turns) , " Turns"," and ", "", ABS(minutes), " Degree\n\"");
-        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+        //SERIAL_ECHOPGM("\xFF\xFF\xFF");
+        //SERIAL_ECHOPGM("t4.txt=\"","Turn ","",(char *)pgm_read_ptr(&tramming_point_name[2]), (screw_thread & 1) == (adjust > 0) ? "CCW" : "CW","\n\"") ;
+        // SERIAL_ECHOPGM("\xFF\xFF\xFF");
+        // SERIAL_ECHOPGM("t40.txt=\"");
+        // SERIAL_ECHO(ABS(full_turns));
+        // SERIAL_ECHOPGM("\"\xFF\xFF\xFF");
         if ( (screw_thread & 1) != (adjust > 0)){
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
           SERIAL_ECHOPGM("p1.pic=171");
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
-          if (ABS(minutes)<=22.5){
+
+          if (ABS(minutes)<=15 && ABS(full_turns)==0){
+            SERIAL_ECHOPGM("\xFF\xFF\xFF");
+            SERIAL_ECHOPGM("p4.aph=127");
+            SERIAL_ECHOPGM("\xFF\xFF\xFF");
+            SERIAL_ECHOPGM("p1.pic=226");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=172");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=45){
+          else if (ABS(minutes)<=22.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=173");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=67.5){
+          else if (ABS(minutes)<=45){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=174");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=90){
+          else if (ABS(minutes)<=67.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=175");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=112.5){
+          else if (ABS(minutes)<=90){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=176");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=135){
+          else if (ABS(minutes)<=112.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=177");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=157.5){
+          else if (ABS(minutes)<=135){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=178");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=180){
+          else if (ABS(minutes)<=157.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=179");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=202.5){
+          else if (ABS(minutes)<=180){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=180");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=225){
+          else if (ABS(minutes)<=202.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=181");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=247.5){
+          else if (ABS(minutes)<=225){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=182");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=270){
+          else if (ABS(minutes)<=247.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=183");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=292.5){
+          else if (ABS(minutes)<=270){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=184");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=315){
+          else if (ABS(minutes)<=292.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=185");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=337.5){
+          else if (ABS(minutes)<=315){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=186");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=360){
+          else if (ABS(minutes)<=337.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=187");
+            SERIAL_ECHOPGM("\xFF\xFF\xFF");
+          }
+          else if (ABS(minutes)<=360){
+            SERIAL_ECHOPGM("\xFF\xFF\xFF");
+            SERIAL_ECHOPGM("p3.pic=188");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
         }
         else{
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
-          SERIAL_ECHOPGM("p1.pic=207");
+          SERIAL_ECHOPGM("p1.pic=208");
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
-          if (ABS(minutes)<=22.5){
+          if (ABS(minutes)<=15 && ABS(full_turns)==0){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p3.pic=188");
+            SERIAL_ECHOPGM("p4.aph=127");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-          }
-          else if (ABS(minutes)<=45){
+            SERIAL_ECHOPGM("p1.pic=226");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=189");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=67.5){
+          else if (ABS(minutes)<=22.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=190");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=90){
+          else if (ABS(minutes)<=45){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=191");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=112.5){
+          else if (ABS(minutes)<=67.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=192");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=135){
+          else if (ABS(minutes)<=90){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=193");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=157.5){
+          else if (ABS(minutes)<=112.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=194");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=180){
+          else if (ABS(minutes)<=135){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=195");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=202.5){
+          else if (ABS(minutes)<=157.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=196");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=225){
+          else if (ABS(minutes)<=180){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=197");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=247.5){
+          else if (ABS(minutes)<=202.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=198");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=270){
+          else if (ABS(minutes)<=225){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=199");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=292.5){
+          else if (ABS(minutes)<=247.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=200");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=315){
+          else if (ABS(minutes)<=270){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=201");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=337.5){
+          else if (ABS(minutes)<=292.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=202");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=360){
+          else if (ABS(minutes)<=315){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p3.pic=203");
+            SERIAL_ECHOPGM("\xFF\xFF\xFF");
+          }
+          else if (ABS(minutes)<=337.5){
+            SERIAL_ECHOPGM("\xFF\xFF\xFF");
+            SERIAL_ECHOPGM("p3.pic=204");
+            SERIAL_ECHOPGM("\xFF\xFF\xFF");
+          }
+          else if (ABS(minutes)<=360){
+            SERIAL_ECHOPGM("\xFF\xFF\xFF");
+            SERIAL_ECHOPGM("p3.pic=205");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
         }
       } 
       if (x == 0){
-        SERIAL_ECHOPGM("\xFF\xFF\xFF");
-        SERIAL_ECHOPGM("t41.txt=\"","Turn ","",(char *)pgm_read_ptr(&tramming_point_name[1]), (screw_thread & 1) == (adjust > 0) ? "CCW" : "CW", " by ", "", ABS(full_turns) , " turns"," and ", "", ABS(minutes), " degree\n\"");
-        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+        // SERIAL_ECHOPGM("\xFF\xFF\xFF");
+        // SERIAL_ECHOPGM("t41.txt=\""); 
+        // SERIAL_ECHO(ABS(full_turns));
+        // SERIAL_ECHOPGM("\"\xFF\xFF\xFF");
         if ( (screw_thread & 1) != (adjust > 0)){
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
           SERIAL_ECHOPGM("p0.pic=171");
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
-          if (ABS(minutes)<=22.5){
+          if (ABS(minutes)<=15 && ABS(full_turns)==0){
+            SERIAL_ECHOPGM("\xFF\xFF\xFF");
+            SERIAL_ECHOPGM("p5.aph=127");
+            SERIAL_ECHOPGM("\xFF\xFF\xFF");
+            SERIAL_ECHOPGM("p0.pic=226");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=172");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=45){
+          else if (ABS(minutes)<=22.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=173");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=67.5){
+          else if (ABS(minutes)<=45){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=174");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=90){
+          else if (ABS(minutes)<=67.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=175");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=112.5){
+          else if (ABS(minutes)<=90){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=176");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=135){
+          else if (ABS(minutes)<=112.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=177");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=157.5){
+          else if (ABS(minutes)<=135){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=178");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=180){
+          else if (ABS(minutes)<=157.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=179");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=202.5){
+          else if (ABS(minutes)<=180){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=180");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=225){
+          else if (ABS(minutes)<=202.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=181");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=247.5){
+          else if (ABS(minutes)<=225){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=182");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=270){
+          else if (ABS(minutes)<=247.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=183");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=292.5){
+          else if (ABS(minutes)<=270){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=184");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=315){
+          else if (ABS(minutes)<=292.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=185");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=337.5){
+          else if (ABS(minutes)<=315){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=186");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=360){
+          else if (ABS(minutes)<=337.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=187");
+            SERIAL_ECHOPGM("\xFF\xFF\xFF");
+          }
+          else if (ABS(minutes)<=360){
+            SERIAL_ECHOPGM("\xFF\xFF\xFF");
+            SERIAL_ECHOPGM("p2.pic=188");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
           
         }
         else{
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
-          SERIAL_ECHOPGM("p0.pic=207");
+          SERIAL_ECHOPGM("p0.pic=208");
           SERIAL_ECHOPGM("\xFF\xFF\xFF");
-          if (ABS(minutes)<=22.5){
+
+          if (ABS(minutes)<=15 && ABS(full_turns)==0){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-            SERIAL_ECHOPGM("p2.pic=188");
+            SERIAL_ECHOPGM("p5.aph=127");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
-          }
-          else if (ABS(minutes)<=45){
+            SERIAL_ECHOPGM("p0.pic=226");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=189");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=67.5){
+          else if (ABS(minutes)<=22.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=190");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=90){
+          else if (ABS(minutes)<=45){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=191");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=112.5){
+          else if (ABS(minutes)<=67.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=192");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=135){
+          else if (ABS(minutes)<=90){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=193");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=157.5){
+          else if (ABS(minutes)<=112.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=194");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=180){
+          else if (ABS(minutes)<=135){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=195");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=202.5){
+          else if (ABS(minutes)<=157.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=196");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=225){
+          else if (ABS(minutes)<=180){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=197");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=247.5){
+          else if (ABS(minutes)<=202.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=198");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=270){
+          else if (ABS(minutes)<=225){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=199");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=292.5){
+          else if (ABS(minutes)<=247.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=200");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=315){
+          else if (ABS(minutes)<=270){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=201");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=337.5){
+          else if (ABS(minutes)<=292.5){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=202");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
-          else if (ABS(minutes)<=360){
+          else if (ABS(minutes)<=315){
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
             SERIAL_ECHOPGM("p2.pic=203");
+            SERIAL_ECHOPGM("\xFF\xFF\xFF");
+          }
+          else if (ABS(minutes)<=337.5){
+            SERIAL_ECHOPGM("\xFF\xFF\xFF");
+            SERIAL_ECHOPGM("p2.pic=204");
+            SERIAL_ECHOPGM("\xFF\xFF\xFF");
+          }
+          else if (ABS(minutes)<=360){
+            SERIAL_ECHOPGM("\xFF\xFF\xFF");
+            SERIAL_ECHOPGM("p2.pic=205");
             SERIAL_ECHOPGM("\xFF\xFF\xFF");
           }
 

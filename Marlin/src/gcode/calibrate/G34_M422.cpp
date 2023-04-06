@@ -78,7 +78,9 @@
  *   A<amplification>  Provide an Amplification value. If omitted, Z_STEPPER_ALIGN_AMP.
  *   R                 Flag to recalculate points based on current probe offsets
  */
+
 void GcodeSuite::G34() {
+  int sayac=0;
   DEBUG_SECTION(log_G34, "G34", DEBUGGING(LEVELING));
   if (DEBUGGING(LEVELING)) log_machine_info();
 
@@ -293,9 +295,19 @@ void GcodeSuite::G34() {
             )
           );
         #endif
-        SERIAL_ECHOPGM("\xFF\xFF\xFF");
-        SERIAL_ECHOPGM("t1071.txt=\"","Z2-Z1=","",ABS(z_measured[1] - z_measured[0]),"\"");
-        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      SERIAL_ECHOPGM("\xFF\xFF\xFF");
+      if (sayac == 0){SERIAL_ECHOPGM("t0.txt=\"Z2-Z1 : ");}
+      if (sayac == 1){SERIAL_ECHOPGM("t1.txt=\"Z2-Z1 : ");}
+      if (sayac == 2){SERIAL_ECHOPGM("t2.txt=\"Z2-Z1 : ");}
+      if (sayac == 3){SERIAL_ECHOPGM("t3.txt=\"Z2-Z1 : ");}
+      if (sayac == 4){SERIAL_ECHOPGM("t4.txt=\"Z2-Z1 : ");}
+      if (sayac == 5){SERIAL_ECHOPGM("t5.txt=\"Z2-Z1 : ");}
+      if (sayac == 6){SERIAL_ECHOPGM("t6.txt=\"Z2-Z1 : ");}
+      if (sayac == 7){SERIAL_ECHOPGM("t7.txt=\"Z2-Z1 : ");}
+      if (sayac == 8){SERIAL_ECHOPGM("t8.txt=\"Z2-Z1 : ");}
+      SERIAL_ECHO(ABS(z_measured[1] - z_measured[0]));
+      SERIAL_ECHOPGM("\"\xFF\xFF\xFF");
+      sayac++;
           #if TRIPLE_Z
             , " Z3-Z2=", ABS(z_measured[2] - z_measured[1])
             , " Z3-Z1=", ABS(z_measured[2] - z_measured[0])
@@ -427,7 +439,10 @@ void GcodeSuite::G34() {
         SERIAL_ECHOLNPGM("G34 aborted.");
       else {
         SERIAL_ECHOLNPGM("Did ", iteration + (iteration != z_auto_align_iterations), " of ", z_auto_align_iterations);
-        SERIAL_ECHOLNPAIR_F("Accuracy: ", z_maxdiff);
+        SERIAL_ECHOPGM("\xFF\xFF\xFF");
+        SERIAL_ECHOPGM("t9.txt=\"Accuracy: ");
+        SERIAL_ECHO(z_maxdiff);
+        SERIAL_ECHOPGM("\"\xFF\xFF\xFF");
         SERIAL_ECHOPGM("\xFF\xFF\xFF");
         SERIAL_ECHOPGM("x.val=1");
         SERIAL_ECHOPGM("\xFF\xFF\xFF");

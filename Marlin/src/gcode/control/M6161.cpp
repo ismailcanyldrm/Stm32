@@ -22,6 +22,8 @@ int H= PE8;
 //int R= PD13; // basınç rölesi
 
               // A-B KOMPONENT - START KONUMU
+int m11=  PA5;
+int m21=  PA6;
 
 void GcodeSuite::M6161()
 {
@@ -53,4 +55,8 @@ digitalWrite(MK, LOW);
 digitalWrite(H, HIGH);
 //-----------------------
 //digitalWrite(R, LOW);
+pinMode(m11, OUTPUT);
+pinMode(m21, OUTPUT);
+digitalWrite(m11, LOW);
+digitalWrite(m21, LOW);
 }

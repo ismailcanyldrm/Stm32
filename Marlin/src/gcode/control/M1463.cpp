@@ -20,6 +20,8 @@ int MK4= PE11;
 int HCC= PE8;
 //-----------------------
 //int ROO= PD13;
+int m14=  PA5;
+int m24=  PA6;
 
               // A-TEMİZLİK - START KONUMU
 
@@ -53,4 +55,8 @@ digitalWrite(MK4, LOW);
 digitalWrite(HCC, LOW);
 //-----------------------
 //digitalWrite(ROO, LOW);
+pinMode(m14, OUTPUT);
+pinMode(m24, OUTPUT);
+digitalWrite(m14, LOW);
+digitalWrite(m24, LOW);
 }

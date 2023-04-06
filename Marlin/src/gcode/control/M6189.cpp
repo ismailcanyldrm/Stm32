@@ -20,6 +20,8 @@ int MK1= PE11;
 int HH= PE8;
 //---------------
 //int RR= PD13;
+int m12=  PA5;
+int m22=  PA6;
 
               // A KOMPONENT - START KONUMU
 
@@ -53,4 +55,9 @@ digitalWrite(MK1, LOW);
 digitalWrite(HH, HIGH);
 //-----------------------
 //digitalWrite(RR, LOW);
+
+pinMode(m12, OUTPUT);
+pinMode(m22, OUTPUT);
+digitalWrite(m12, LOW);
+digitalWrite(m22, LOW);
 }

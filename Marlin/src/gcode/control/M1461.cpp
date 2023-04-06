@@ -20,6 +20,8 @@ int MK3= PE11;
 int HC= PE8;
 //-----------------------
 //int RO= PD13;
+int m15=  PA5;
+int m25=  PA6;
 
               // TEMİZLİK - START KONUMU
 
@@ -53,4 +55,8 @@ digitalWrite(MK3, LOW);
 digitalWrite(HC, LOW);
 //-----------------------
 //digitalWrite(RO, LOW);
+pinMode(m15, OUTPUT);
+pinMode(m25, OUTPUT);
+digitalWrite(m15, LOW);
+digitalWrite(m25, LOW);
 }

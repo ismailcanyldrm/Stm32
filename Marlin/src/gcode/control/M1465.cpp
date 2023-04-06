@@ -22,6 +22,9 @@ int HCCC= PE8;
 //int ROOO= PD13;
 
               // B-TEMİZLİK - START KONUMU
+              
+int m16=  PA5;
+int m26=  PA6;
 
 void GcodeSuite::M1465()
 {
@@ -53,4 +56,8 @@ digitalWrite(MK5, LOW);
 digitalWrite(HCCC, LOW);
 //-----------------------
 //digitalWrite(ROOO, LOW);
+pinMode(m16, OUTPUT);
+pinMode(m26, OUTPUT);
+digitalWrite(m16, LOW);
+digitalWrite(m26, LOW);
 }
